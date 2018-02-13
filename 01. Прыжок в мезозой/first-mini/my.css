@@ -1,5 +1,6 @@
 body {
   background-color: #3A2E85;
+  color: #FF7A00;
 }
 
 .header{
@@ -19,14 +20,12 @@ body {
 
 .about h4, h5{
   margin: 30px;
-  background-color: #3A2E99;
 }
 
 /* иначе не работает. надо спросить*/
 .adout  a, h4 a, h5 a{
-  color: #FFB673;
+  color: #FF7A00;
 }
-
 
 /*
 Не работает

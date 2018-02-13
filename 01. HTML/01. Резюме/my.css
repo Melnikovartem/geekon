@@ -1,23 +1,19 @@
 body {
-  background-color: #6C4ED3;
+  background-color: #237A5B ;
+  color: #F3A30C;
+  font-weight: bold;
 }
 
 #header{
-  background-color: #402E7D;
+  background-color: #036A45;
   height: 10%;
   margin-bottom: 20px;
-  color: #F3380C;
+  color: #D8EE0B;
 
 }
 
-#header p{
-  align: "right";
-}
-
-
-
-#social {
-  color: #D565C4;
+#important {
+  color: #E6F746;
 }
 
 .leftside{
@@ -34,6 +30,6 @@ body {
 #footer{
   margin-top:110%;
   height: 5%;
-  background-color: #2E4053;
-    color: #F39C12;
+  background-color: #036A45 ;
+    color: #B68934;
 }
