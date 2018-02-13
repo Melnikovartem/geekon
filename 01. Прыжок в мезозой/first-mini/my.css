@@ -1,0 +1,47 @@
+body {
+  background-color: #3A2E85;
+}
+
+.header{
+  color: #D2F700;
+}
+
+.about{
+  color: #FF7A00;
+  width: 60%;
+  margin-left:3%;
+}
+
+.about b{
+  color: #FF8C00;
+  font-weight: bold;
+}
+
+.about h4, h5{
+  margin: 30px;
+  background-color: #3A2E99;
+}
+
+/* иначе не работает. надо спросить*/
+.adout  a, h4 a, h5 a{
+  color: #FFB673;
+}
+
+
+/*
+Не работает
+.abbout a { padding:15px; font-weight:bold; float:left; }
+.abbout a:link { color:#d0d0d0; background-color:#0000a0; }
+.abbout a:visited { color:#c0c0c0; background-color:#0000a0; }
+.abbout a:hover { color:#ffffff; background-color:#000060; }
+.abbout a:active { color:#f0f0f0; background-color:#00ff00; }
+*/
+
+.add_your_inf{
+  color: #DFFB3F;
+  margin-left: 7%;
+}
+.main_inf{
+  margin-top:1000px;
+  color:#3A2E99
+}

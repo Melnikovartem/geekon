@@ -1,0 +1,39 @@
+body {
+  background-color: #6C4ED3;
+}
+
+#header{
+  background-color: #402E7D;
+  height: 10%;
+  margin-bottom: 20px;
+  color: #F3380C;
+
+}
+
+#header p{
+  align: "right";
+}
+
+
+
+#social {
+  color: #D565C4;
+}
+
+.leftside{
+  padding-left: 10px;
+}
+
+#content table img{
+  align: "left";
+}
+#information{
+  width: 200px;
+}
+
+#footer{
+  margin-top:110%;
+  height: 5%;
+  background-color: #2E4053;
+    color: #F39C12;
+}
