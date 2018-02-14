@@ -12,8 +12,12 @@ body {
 
 }
 
-#important {
+.important {
   color: #E6F746;
+}
+
+.important h4{
+  padding-top: 50px
 }
 
 .leftside{
