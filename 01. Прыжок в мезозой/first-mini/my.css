@@ -40,6 +40,9 @@ a h3 {
 .abbout a:active { color:#f0f0f0; background-color:#00ff00; }
 */
 
+#preview{
+  margin: 30px;
+}
 .add_your_inf{
   color: #DFFB3F;
   margin-left: 7%;
