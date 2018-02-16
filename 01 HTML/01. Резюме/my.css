@@ -13,6 +13,7 @@ body {
 }
 
 .important {
+  font-weight: bold;
   color: #E6F746;
 }
 
@@ -24,11 +25,16 @@ body {
   padding-left: 10px;
 }
 
+.leftside h4{
+  margin: 10px
+}
+
 #content table img{
   align: "left";
 }
-#information{
-  width: 200px;
+
+.information{
+  width: 333px;
 }
 
 #footer{
