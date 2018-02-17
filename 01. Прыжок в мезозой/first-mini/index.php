@@ -38,6 +38,7 @@ function sh(){
   obj = document.getElementById("ab");
   if(obj.style.display === "none"){obj.style.display = "block";} else {obj.style.display = "none"}
 }
+
 </script>
 <form action = '/win.php?pr=<?php echo $prize[0]; ?>' method = "POST">
   <table  class = "add_your_inf">

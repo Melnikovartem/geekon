@@ -43,3 +43,9 @@ body {
   background-color: #036A45 ;
     color: #B68934;
 }
+
+a h1{
+  font-weight: bold;
+  color: #E6F746;
+  margin: 100px;
+}
