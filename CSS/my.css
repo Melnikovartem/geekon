@@ -27,11 +27,17 @@ menu{
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 300px;
+  height: 400px;
 }
 
 .block > p{
-  margin-top: 100px;
+  margin-top: 50px;
+  z-index: 21;
+}
+
+.block > h2{
+  position: absolute;
+  top: 40px;
   z-index: 21;
 }
 
@@ -42,18 +48,14 @@ menu{
 .attention > img{
   margin-top:100px;
   z-index: 20;
-  align-self: flex-end;
   border-radius: 100px;
   padding: 5px;
-}
-
-.attention > p{
-  position: absolute;
 }
 
 .interest{
   background-color: #fafffd;
 }
+
 
 .desire{
   background-color: #9fd356;
@@ -68,7 +70,7 @@ menu{
   border-radius: 100px;
   width: 100%;
   position: absolute;
-  margin-top:150px;
+  margin-top:200px;
   z-index: 10;
 }
 
