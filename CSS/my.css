@@ -16,7 +16,7 @@ menu{
   height: 30px;
   position: fixed;
   background-color: #fafffd;
-  z-index: 10;
+  z-index: 100;
   width: 100%;
   padding-top: 10px;
 }
@@ -25,17 +25,30 @@ menu{
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   height: 300px;
-  z-index: 0;
 }
 
 .block > p{
-  position: absolute;
   margin-top: 100px;
+  z-index: 21;
 }
 
 .attention{
   background-color: #fa824c;
+}
+
+.attention > img{
+  margin-top:100px;
+  z-index: 20;
+  align-self: flex-end;
+  border-radius: 100px;
+  padding: 5px;
+}
+
+.attention > p{
+  position: absolute;
 }
 
 .interest{
@@ -55,12 +68,10 @@ menu{
   border-radius: 100px;
   width: 100%;
   position: absolute;
-  margin-top:-50px;
-  z-index:1;
+  margin-top:150px;
+  z-index: 10;
 }
 
-#send {
-  position: absolute;
-  top: 150px;
+form {
   align-self: center;
 }
