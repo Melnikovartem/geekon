@@ -1,9 +1,48 @@
 body{
   padding: 0px;
   margin: 0px;
+  background-color: #fafffd;
+  color: #342e37
+}
+
+menu{
+  margin: 0px;
+  height: 30px;
+  position: fixed;
+  background-color: #fafffd;
+  z-index: 10;
+  width: 100%;
+  padding-top: 10px;
 }
 
 .block{
   position: relative;
   height: 300px;
+  z-index: 0;
+}
+
+#attention{
+  background-color: #fa824c;
+}
+
+#interest{
+  background-color: #fafffd;
+}
+
+#desire{
+  background-color: #9fd356;
+}
+
+#action{
+  background-color: #3c91e6;
+}
+
+.fall-in{
+  background-color: #9fd356;
+  height: 100px;
+  border-radius: 100px;
+  width: 100%;
+  position: absolute;
+  margin-top:-50px;
+  z-index:1;
 }
