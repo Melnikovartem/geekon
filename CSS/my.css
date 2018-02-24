@@ -13,12 +13,19 @@ body{
 
 menu{
   margin: 0px;
-  height: 30px;
+  height: 40px;
   position: fixed;
   background-color: #fafffd;
   z-index: 100;
   width: 100%;
   padding-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+menu > a {
+  text-decoration: none;
 }
 
 .block{
@@ -28,6 +35,11 @@ menu{
   align-items: center;
   flex-direction: column;
   height: 400px;
+}
+
+.block > a{
+  position: absolute;
+  top: 0px;
 }
 
 .block > p{
@@ -63,18 +75,42 @@ menu{
   top: 110px;
 }
 
+table{
+  text-align: center;
+  border-spacing: 100px 10px;
+}
+
 td > img{
   height: 100px;
   width: 100px;
   border-radius: 25px;
-  margin-right: 60px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
-
 
 .desire{
   background-color: #9fd356;
+}
+
+.desire > p{
+  width: 600px;
+  position: absolute;
+  right: 40px;
+}
+
+.desire > h3{
+  width: 600px;
+  position: absolute;
+  right: 40px;
+  top: 140px;
+}
+
+.desire > img{
+  position: absolute;
+  left: 40px;
+  top: 115px;
+  height: 300px;
+  border-radius: 100px;
+  z-index: 21;
 }
 
 .action{
