@@ -50,10 +50,26 @@ menu{
   z-index: 20;
   border-radius: 100px;
   padding: 5px;
+  height: 300px;
 }
 
 .interest{
   background-color: #fafffd;
+}
+
+.interest > table{
+  position: absolute;
+  z-index: 20;
+  top: 110px;
+}
+
+td > img{
+  height: 100px;
+  width: 100px;
+  border-radius: 25px;
+  margin-right: 60px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 
