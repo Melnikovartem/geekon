@@ -24,7 +24,7 @@
       </div>
       <input type="text" class="form-control" placeholder="example@google.com" aria-label="Username" aria-describedby="basic-addon1" name = "email">
     </div>
-    <button type="submit" class="btn btn-outline-success">Post it</button>
+    <button type="submit" class="btn btn-outline-success">Register</button>
   </form>
 </div>
 
