@@ -38,7 +38,7 @@
 
 if(isset($_POST["key"]) and isset($_POST["header"]) and isset($_POST["text"])){
 
-  $connection = mysqli_connect('192.168.64.2', 'root1', '123456');
+  $connection = mysqli_connect('127.0.0.1', 'root', 'root');
   mysqli_select_db($connection, 'blog');
   mysqli_set_charset($connection, 'utf8');
 
