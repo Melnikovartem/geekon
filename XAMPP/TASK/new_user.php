@@ -50,9 +50,8 @@ if(isset($_POST["username"]) and isset($_POST["email"])){
    while (isset(mysqli_fetch_all(mysqli_query($connection, 'SELECT * FROM users WHERE user_key = "' . $key . '"'))[0])){
      $key = generateRandomString();
    }
-  mysqli_query($connection, 'INSERT INTO users (user_key, email, name) VALUES (' . $key . ',"' . $_POST["email"] . '","' . $_POST["username"]. '") ');
-  echo 'INSERT INTO users (user_key, email, name) VALUES (' . $key . ',"' . $_POST["email"] . '","' . $_POST["username"]. '") ';
-  echo "<div class='alert alert-success' role='alert'>Your user key: @" . $key . "</div>";
+  mysqli_query($connection, 'INSERT INTO users (user_key, email, name) VALUES ("' . $key . '","' . $_POST["email"] . '","' . $_POST["username"]. '") ');
+  echo "<div class='alert alert-success' role='alert'>Your user key: @" . $key . " - It's important to remember it!</div>";
 }
 else
   echo "<div class='alert alert-danger' role='alert'>Error: missing data!</div>";
