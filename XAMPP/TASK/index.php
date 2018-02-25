@@ -9,6 +9,7 @@
     <button class="btn btn-outline-dark">New user</button>
   </form>
 </div>
+
 <div class = "content">
   <div class = "article">
     <h3>What happend to tram have interested all kreml</h3>
@@ -61,9 +62,6 @@ echo '</ul>';
 </div>
 <div class="alert alert-success" role="alert">
   This is a success alert—check it out!
-</div>
-<div class="alert alert-danger" role="alert">
-  This is a danger alert—check it out!
 </div>
 <div class="alert alert-warning" role="alert">
   This is a warning alert—check it out!

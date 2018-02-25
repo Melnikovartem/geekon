@@ -16,7 +16,7 @@ body{
   position: relative;
   height: 100px;
   width: 100%;
-  top: 50px;
+  top: 30px;
   left: 10px;
 }
 
@@ -24,4 +24,8 @@ body{
   height: 50px;
   width: 200px;
   margin-top: 15px;
+}
+
+.content{
+  margin-top: 20px;
 }
