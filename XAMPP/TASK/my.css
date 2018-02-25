@@ -1,0 +1,27 @@
+
+body{
+  margin: 0px;
+  background-color: #FFFFFF;
+}
+
+.header{
+  background-color: #F9A03F;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.article{
+  position: relative;
+  height: 100px;
+  width: 100%;
+  top: 50px;
+  left: 10px;
+}
+
+.btn-outline-dark{
+  height: 50px;
+  width: 200px;
+  margin-top: 15px;
+}

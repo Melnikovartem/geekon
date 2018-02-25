@@ -6,7 +6,7 @@
   <li><a href = "HTML/res/main.html "><h3>Резюме</h3></a></li>
   <li><a href = "jump/first-mini/index.php"><h3>Вы - наш миллионный пользователь!!!</h3></a></li>
   <li><a href = "CSS/main.html"><h3>Купи слона</h3></a></li>
-  <li><a href = ""><h3>Бложек</h3></a></li>
+  <li><a href = "XAMPP/TASK/index.php"><h3>Бложек</h3></a></li>
 
 </ul>
 <p>Сначала хотел сделать интересную и креативную стартовую страницу, которая обыгрывала бы,
