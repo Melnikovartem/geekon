@@ -13,6 +13,7 @@ else {
 ?>
 
 
+<meta charset="utf-8">
 <link rel="stylesheet" href = "./my.css" >
 <?php
 $ok = 1;

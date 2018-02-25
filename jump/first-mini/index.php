@@ -6,6 +6,7 @@ $prize = $prizes_var[rand(0,count($prizes_var)-1)];
 
 ?>
 
+<meta charset="utf-8">
 <title>Ваш шанс!!!</title>
 
 <link rel="stylesheet" href = "./my.css" >
@@ -40,7 +41,7 @@ function sh(){
 }
 
 </script>
-<form action = '/win.php?pr=<?php echo $prize[0]; ?>' method = "POST">
+<form action = 'win.php?pr=<?php echo $prize[0]; ?>' method = "POST">
   <table  class = "add_your_inf">
     <tr>
       <th colspan = "2"><h3> Заполните информацию:  <h3></th>
