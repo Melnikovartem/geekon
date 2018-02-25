@@ -11,7 +11,7 @@
 </div>
 
 <div class="content">
-  <form action = "new_user.php" method = "POST">
+  <form method = "POST">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Username</span>

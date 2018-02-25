@@ -11,13 +11,14 @@
 </div>
 
 <div class="content">
-  <form action = "new_article.php" method = "POST">
+  <form method = "POST">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">@</span>
       </div>
       <input type="text" class="form-control" placeholder="Your user key" aria-label="Username" aria-describedby="basic-addon1" name = "key">
     </div>
+    <p>*<small> if you want to be anonymous you can use our @00000000 user key</small></p>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">Header</span>
