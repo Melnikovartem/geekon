@@ -1,0 +1,21 @@
+.change{
+  padding:20px;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+}
+
+#base{
+  background-color: #FFF1FF;
+}
+
+#tech{
+  background-color: url('https://media.giphy.com/media/l2ZDTX0rMg7mToe8E/giphy.gif')
+}
+
+#yellow{
+  background-color: #F1D302
+}
+#heya{
+  background-image: url('https://media.giphy.com/media/rx28cY9OUNBmw/giphy.gif')
+}
