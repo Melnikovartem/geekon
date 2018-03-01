@@ -33,5 +33,13 @@ body{
 
 #article{
   margin-left: 10px;
-  margin-bottom: 200px;
+  margin-bottom: 250px;
+}
+
+.leave_comment{
+  background-color: #FAFAFA;
+  margin-left: -20px;
+  padding: 20px;
+  padding-bottom: 100px;
+  display: block;
 }

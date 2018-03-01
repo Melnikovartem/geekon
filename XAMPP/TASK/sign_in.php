@@ -2,12 +2,34 @@
 $user = False;
 if(isset($_COOKIE["auth"])){
   if($_COOKIE["auth"] != "new"){
-    $user  = True;
+    setcookie("auth", "new" , time()+3600);
   }
 }
 else{
   setcookie("auth", "new" , time()+3600);
 }
+
+function generateRandomString($length = 8) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+if(isset($_POST["username"]) and isset($_POST["password"])){
+
+  $connection = mysqli_connect('192.168.64.2', 'root1', '123456');
+  mysqli_select_db($connection, 'blog');
+  mysqli_set_charset($connection, 'utf8');
+  $query_result = mysqli_query($connection, 'SELECT * FROM users WHERE username = "' . $_POST["user"] . '" AND password = "' . $_POST["password"] . '"');
+  $result = mysqli_fetch_all($query_result);
+  if(isset($query_result))
+    setcookie("auth", generateRandomString() , time()+3600); // i'm in plane nd i forgot how to write sessions
+  }
+
 ?>
 
 <link rel="stylesheet" href="my.css">
@@ -35,7 +57,7 @@ else{
 </div>
 
 <div class="content">
-  <form action = "index.php" method = "POST">
+  <form  method = "POST" action = "index.php">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Username</span>
@@ -44,20 +66,10 @@ else{
     </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">Email adress</span>
-      </div>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name = "email">
-    </div>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Password</span>
       </div>
       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name = "password">
     </div>
-    <?php
-    if($user != True){
-        echo '<button type="submit" class="btn btn-outline-success">Register</button>';
-      }
-     ?>
+    <button type="submit" class="btn btn-outline-success">Sing in</button>
   </form>
 </div>
