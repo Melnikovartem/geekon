@@ -2,7 +2,7 @@
 session_start();
 $user = False;
 if(isset($_COOKIE["auth"])){
-  if($_COOKIE["auth"] != "new" and isset($_SESSION[$_COOKIE["auth"]])){
+  if($_COOKIE["auth"] != "new" and isset($_SESSION[$_COOKIE["auth"] . "id"])){
     $user  = True;
   }
 }
@@ -11,8 +11,8 @@ else{
 }
 
 
-
-$connection = mysqli_connect('192.168.64.2', 'root1', '123456');
+$data= json_decode(file_get_contents('server'), true);
+$connection = mysqli_connect($data[0], $data[1], $data[2]);
 mysqli_select_db($connection, 'blog');
 mysqli_set_charset($connection, 'utf8');
 
@@ -34,7 +34,7 @@ if(isset($_POST["username"]) and isset($_POST["password"])){
   if(isset($result[0])){
     $session = generateRandomString();
     $_SESSION[$session . "id"] = $result[0][0];
-    setcookie("auth", $session , time()+3600); 
+    setcookie("auth", $session , time()+3600);
     $user = True;
   }
   else

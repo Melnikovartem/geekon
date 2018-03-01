@@ -2,13 +2,14 @@
 session_start();
 $user = False;
 if(isset($_COOKIE["auth"])){
-  if($_COOKIE["auth"] != "new"){
+  if($_COOKIE["auth"] != "new" and isset($_SESSION[$_COOKIE["auth"] . "id"])){
     $user  = True;
   }
 }
 else{
   setcookie("auth", "new" , time()+3600);
 }
+
 ?>
 <link rel="stylesheet" href="my.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -35,7 +36,7 @@ else{
 </div>
 
 <div class="content" >
-  <form method = "POST" action = "index.php">
+  <form method = "POST" action = "new_article.php">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">Header</span>
@@ -59,14 +60,15 @@ else{
 
 if(isset($_POST["header"]) and isset($_POST["text"])){
 
-  $connection = mysqli_connect('192.168.64.2', 'root1', '123456');
+  $data= json_decode(file_get_contents('server'), true);
+  $connection = mysqli_connect($data[0], $data[1], $data[2]);
   mysqli_select_db($connection, 'blog');
   mysqli_set_charset($connection, 'utf8');
 
   mysqli_query($connection, 'INSERT INTO articles (user_id, header, text) VALUES (' . $_SESSION[$_COOKIE["auth"] . "id"] . ',"' . $_POST["header"] . '","' . $_POST["text"]. '") ');
   echo "<div class='alert alert-success' role='alert'>
       Your article was posted!
-    </div>"
+    </div>";
 
 }
 

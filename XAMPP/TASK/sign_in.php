@@ -1,13 +1,15 @@
 <?php
+session_start();
 $user = False;
 if(isset($_COOKIE["auth"])){
-  if($_COOKIE["auth"] != "new"){
-    setcookie("auth", "new" , time()+3600);
+  if($_COOKIE["auth"] != "new" and isset($_SESSION[$_COOKIE["auth"] . "id"])){
+    $user  = True;
   }
 }
 else{
   setcookie("auth", "new" , time()+3600);
 }
+
 
 function generateRandomString($length = 8) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -21,7 +23,8 @@ function generateRandomString($length = 8) {
 
 if(isset($_POST["username"]) and isset($_POST["password"])){
 
-  $connection = mysqli_connect('192.168.64.2', 'root1', '123456');
+  $data= json_decode(file_get_contents('server'), true);
+  $connection = mysqli_connect($data[0], $data[1], $data[2]);
   mysqli_select_db($connection, 'blog');
   mysqli_set_charset($connection, 'utf8');
   $query_result = mysqli_query($connection, 'SELECT * FROM users WHERE username = "' . $_POST["user"] . '" AND password = "' . $_POST["password"] . '"');

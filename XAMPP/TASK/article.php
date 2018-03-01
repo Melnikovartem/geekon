@@ -2,13 +2,19 @@
 session_start();
 $user = False;
 if(isset($_COOKIE["auth"])){
-  if($_COOKIE["auth"] != "new"){
+  if($_COOKIE["auth"] != "new" and isset($_SESSION[$_COOKIE["auth"] . "id"])){
     $user  = True;
   }
 }
 else{
   setcookie("auth", "new" , time()+3600);
 }
+
+$data= json_decode(file_get_contents('server'), true);
+$connection = mysqli_connect($data[0], $data[1], $data[2]);
+mysqli_select_db($connection, 'blog');
+mysqli_set_charset($connection, 'utf8');
+
 ?>
 <link rel="stylesheet" href="my.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -37,9 +43,6 @@ else{
 <div class = "content">
   <div id = "article">
 <?php
-$connection = mysqli_connect('192.168.64.2', 'root1', '123456');
-mysqli_select_db($connection, 'blog');
-mysqli_set_charset($connection, 'utf8');
 
 if(isset($_GET["id"]) ){
   $query_result = mysqli_query($connection, 'SELECT header, text FROM articles WHERE id = ' . $_GET["id"] );

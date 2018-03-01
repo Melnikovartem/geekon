@@ -1,13 +1,15 @@
 <?php
+session_start();
 $user = False;
 if(isset($_COOKIE["auth"])){
-  if($_COOKIE["auth"] != "new"){
+  if($_COOKIE["auth"] != "new" and isset($_SESSION[$_COOKIE["auth"] . "id"])){
     $user  = True;
   }
 }
 else{
   setcookie("auth", "new" , time()+3600);
 }
+
 ?>
 
 <link rel="stylesheet" href="my.css">

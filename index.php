@@ -1,5 +1,4 @@
-
-
+<meta charset="utf-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <title>Мои Работы</title>
 <h1>Каталог мини-проектов:</h1>
@@ -15,4 +14,3 @@
 </ul>
 <p>Сначала хотел сделать интересную и креативную стартовую страницу, которая обыгрывала бы,
   что ты - миллионный посетитель моей страницы, но пото я осознал, что уже 3 часа ночи </p><h1>¯\_(ツ)_/¯</h1>
-
