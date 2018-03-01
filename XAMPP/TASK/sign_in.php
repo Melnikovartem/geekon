@@ -3,7 +3,7 @@ session_start();
 $user = False;
 if(isset($_COOKIE["auth"])){
   if($_COOKIE["auth"] != "new" and isset($_SESSION[$_COOKIE["auth"] . "id"])){
-    $user  = True;
+      setcookie("auth", "new" , time()+3600);
   }
 }
 else{
