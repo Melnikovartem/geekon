@@ -73,16 +73,18 @@ if(isset($_POST["username"]) and isset($_POST["password"])){
 <div class = "content">
 
   <?php
-  $query_result = mysqli_query($connection, 'SELECT header, id FROM articles ORDER BY time DESC');
+  $query_result = mysqli_query($connection, 'SELECT header, id, user_id FROM articles ORDER BY time DESC');
   $article = mysqli_fetch_all($query_result);
 
   foreach ($article as $article) {
-    echo '<div class = "article">
+    $username = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = ' . $article[2]))[0];
+    if(!$username)
+      $username = ["Deleted User"];
+    echo '<div class = "article form-group">
       <h3>' . $article[0] . '</h3>
-        <div class = "form-group">
-          <a href = "article.php?id=' . $article[1]. '"><small>READ MORE</small></a>
-        </div>
-    </div>';
+      <p>by ' . $username[0] . '<p>
+      <a href = "article.php?id=' . $article[1]. '"><small>READ MORE</small></a>
+      </div>';
   }
 ?>
 

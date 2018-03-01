@@ -16,8 +16,12 @@ body{
   position: relative;
   height: 100px;
   width: 100%;
-  top: 30px;
+  top: 20px;
   left: 10px;
+}
+
+.article.form-group{
+  margin-bottom: 50px;
 }
 
 .btn-outline-dark{

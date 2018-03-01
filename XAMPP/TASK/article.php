@@ -45,11 +45,15 @@ mysqli_set_charset($connection, 'utf8');
 <?php
 
 if(isset($_GET["id"]) ){
-  $query_result = mysqli_query($connection, 'SELECT header, text FROM articles WHERE id = ' . $_GET["id"] );
-  $article = mysqli_fetch_all($query_result);
-  if(isset($article[0])){
-    echo "<h1>" . $article[0][0] . "</h1>
-      <p>" . $article[0][1] . "</p>";
+  $query_result = mysqli_query($connection, 'SELECT header, text, time, user_id FROM articles WHERE id = ' . $_GET["id"] );
+  $article = mysqli_fetch_all($query_result)[0];
+  if(isset($article)){
+    $username = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = ' . $article[3]))[0];
+    if(!$username)
+      $username = ["Deleted User"];
+    echo "<h1>" . $article[0] . "</h1>
+      <p><small>by " . $username[0] . " at " . $article[2] . "</small></p>
+      <p>" . $article[1] . "</p>";
   }
   else
     echo "<div class='alert alert-danger' role='alert'>Error: not valid article id!</div>";
@@ -69,6 +73,7 @@ if($user){
       <label for='exampleFormControlTextarea1'>Your comment:</label>
       <textarea class='form-control' id='exampleFormControlTextarea1' rows='3' name = 'text'></textarea>
     </div>
+    <p>*<small>Comment can't be edited, but can be deleted by author or admin</small></p>
     <button type='submit' class='btn btn-outline-success'>Post it</button>
   </form>
 </div>";
@@ -83,7 +88,7 @@ if(isset($_POST["text"]) and $user){
 <h3>Comments:</h3>
 <?php
 
-$query_result = mysqli_query($connection, 'SELECT user_id, text FROM comments WHERE article_id = ' . $_GET["id"]);
+$query_result = mysqli_query($connection, 'SELECT user_id, text, time FROM comments WHERE article_id = ' . $_GET["id"]);
 $comments = mysqli_fetch_all($query_result);
 
 
@@ -91,7 +96,9 @@ echo '<ul>';
 foreach ($comments as $comment)
 {
     $user = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = "' . $comment[0] . '"'))[0];
-    echo '<li>'.$user[0]. ': '.$comment[1].'</li>';
+    if(!$user)
+      $user = ["Deleted User"];
+    echo '<li>'. $user[0] . " " . $comment[2] . ': '.$comment[1].'</li>';
 }
 echo '</ul>';
 

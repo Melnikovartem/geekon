@@ -57,7 +57,7 @@ else{
       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name = "password">
     </div>
     <?php
-    if($user != True){
+    if(!$user){
         echo '<button type="submit" class="btn btn-outline-success">Register</button>';
       }
      ?>
