@@ -59,17 +59,19 @@ else{
 <?php
 
 if(isset($_POST["header"]) and isset($_POST["text"])){
+  if($_POST["header"] == "" or $_POST["header"] == "")
+    echo "<div class='alert alert-danger' role='alert'>Error: Empty field!</div>";
+  else{
+    $data= json_decode(file_get_contents('server'), true);
+    $connection = mysqli_connect($data[0], $data[1], $data[2]);
+    mysqli_select_db($connection, 'blog');
+    mysqli_set_charset($connection, 'utf8');
 
-  $data= json_decode(file_get_contents('server'), true);
-  $connection = mysqli_connect($data[0], $data[1], $data[2]);
-  mysqli_select_db($connection, 'blog');
-  mysqli_set_charset($connection, 'utf8');
-
-  mysqli_query($connection, 'INSERT INTO articles (user_id, header, text) VALUES (' . $_SESSION[$_COOKIE["auth"] . "id"] . ',"' . $_POST["header"] . '","' . $_POST["text"]. '") ');
-  echo "<div class='alert alert-success' role='alert'>
-      Your article was posted!
-    </div>";
-
+    mysqli_query($connection, 'INSERT INTO articles (user_id, header, text) VALUES (' . $_SESSION[$_COOKIE["auth"] . "id"] . ',"' . $_POST["header"] . '","' . $_POST["text"]. '") ');
+    echo "<div class='alert alert-success' role='alert'>
+        Your article was posted!
+      </div>";
+  }
 }
 
 ?>

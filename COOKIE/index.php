@@ -21,6 +21,7 @@
       <option value = "heya">HEYYEYAAEYAAAEYAEYAA</option>
       <option value = "yellow">Yellow</option>
       <option value = "tic-tac">Тик-так-тик-так</option>
+      <option value = "russia">Russia is better then linux</option>
     </select>
     <input type = "submit" value = "Я готов к преобразованиям">
   </form>

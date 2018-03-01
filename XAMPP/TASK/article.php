@@ -39,19 +39,22 @@ mysqli_set_charset($connection, 'utf8');
   }
 ?>
 </div>
-
 <div class = "content">
-  <div id = "article">
 <?php
-
 if(isset($_GET["id"]) ){
+
   $query_result = mysqli_query($connection, 'SELECT header, text, time, user_id FROM articles WHERE id = ' . $_GET["id"] );
   $article = mysqli_fetch_all($query_result)[0];
   if(isset($article)){
     $username = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = ' . $article[3]))[0];
     if(!$username)
       $username = ["Deleted User"];
-    echo "<h1>" . $article[0] . "</h1>
+    if($_SESSION[$_COOKIE["auth"] . "id"] == $article[3] or $_SESSION[$_COOKIE["auth"] . "admin"]){
+      echo'<div class = "edit">
+          <h2><a href = "edit_article.php?id=' . $_GET['id'] . '">Edit</a></h2>
+        </div>';
+    }
+    echo "<div id = 'article'><h1>" . $article[0] . "</h1>
       <p><small>by " . $username[0] . " at " . $article[2] . "</small></p>
       <p>" . $article[1] . "</p>";
   }
@@ -73,7 +76,7 @@ if($user){
       <label for='exampleFormControlTextarea1'>Your comment:</label>
       <textarea class='form-control' id='exampleFormControlTextarea1' rows='3' name = 'text'></textarea>
     </div>
-    <p>*<small>Comment can't be edited, but can be deleted by author or admin</small></p>
+    <p>*<small>Comment can't be edited, but can be deleted by admin</small></p>
     <button type='submit' class='btn btn-outline-success'>Post it</button>
   </form>
 </div>";

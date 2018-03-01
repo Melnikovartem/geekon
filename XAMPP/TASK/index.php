@@ -36,6 +36,9 @@ if(isset($_POST["username"]) and isset($_POST["password"])){
     $_SESSION[$session . "id"] = $result[0][0];
     setcookie("auth", $session , time()+3600);
     $user = True;
+    if($_POST["username"] == "root" and $_POST["password"]=="root"){
+      $_SESSION[$session . "admin"] = True;
+    }
   }
   else
     $error = "<div class='alert alert-danger' role='alert'>Error:  Wrong username or password!</div>";
