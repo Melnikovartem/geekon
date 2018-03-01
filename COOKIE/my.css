@@ -10,12 +10,21 @@
 }
 
 #tech{
-  background-color: url('https://media.giphy.com/media/l2ZDTX0rMg7mToe8E/giphy.gif')
+  background-image: url('https://media.giphy.com/media/l2ZDTX0rMg7mToe8E/giphy.gif')
 }
 
 #yellow{
   background-color: #F1D302
 }
+
 #heya{
   background-image: url('https://media.giphy.com/media/rx28cY9OUNBmw/giphy.gif')
+}
+
+#tic-tac{
+  background-image: url('https://media.giphy.com/media/QpvKlmW61K52g/giphy.gif')
+}
+
+#linux{
+  background-image: url('https://media.giphy.com/media/xUPGcEliCc7bETyfO8/source.gif')
 }
