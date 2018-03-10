@@ -9,6 +9,30 @@ if(isset($_COOKIE["auth"])){
 else{
   setcookie("auth", "new" , time()+3600);
 }
+
+
+function generateRandomString($length = 8) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+if(isset($_POST["username"]) and isset($_POST["password"])){
+
+  $data= json_decode(file_get_contents('server'), true);
+  $connection = mysqli_connect($data[0], $data[1], $data[2]);
+  mysqli_select_db($connection, 'blog');
+  mysqli_set_charset($connection, 'utf8');
+  $query_result = mysqli_query($connection, 'SELECT * FROM admin WHERE username = "' . $_POST["user"] . '" AND password = "' . $_POST["password"] . '"');
+  $result = mysqli_fetch_all($query_result);
+  if(isset($query_result))
+    setcookie("auth", generateRandomString() , time()+3600); // i'm in plane nd i forgot how to write sessions
+  }
+
 ?>
 
 <link rel="stylesheet" href="my.css">
@@ -36,7 +60,7 @@ else{
 </div>
 
 <div class="content">
-  <form  method = "POST" action = "index.php">
+  <form  method = "POST" action = "login.php">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Username</span>
@@ -49,6 +73,6 @@ else{
       </div>
       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name = "password">
     </div>
-    <button type="submit" class="btn btn-outline-success">Sing in</button>
+    <button type="submit" class="btn btn-outline-success">I am admin (grut)</button>
   </form>
 </div>
