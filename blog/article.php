@@ -1,5 +1,5 @@
 <?php
-//pae to look and comment an article
+//page to look and comment an article
 
 
 ?>
