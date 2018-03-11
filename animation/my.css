@@ -23,6 +23,8 @@ body{
   animation: 5s linear my-animation infinite;
 }
 
+
+/*Person's basic parts*/
 .person{
   position: relative;
   height: 200px;
@@ -47,31 +49,261 @@ body{
   left: 22px;
 }
 
-.r_leg_1{
+.r_leg{
   position: absolute;
   background-color: black;
   width: 6px;
-  height: 20px;
-  top: 62px;
-  left: 28px;
-  transform: rotate(315deg);
-}
-
-.r_leg_2{
-  position: absolute;
-  background-color: black;
-  width: 6px;
-  height: 20px;
+  height: 35px;
   top: 68px;
-  left: 23px;
+  left: 25px;
+  transform: skewX(10deg);
 }
 
-.l_leg_1{
+.l_leg{
   position: absolute;
   background-color: black;
+  width: 6px;
+  height: 35px;
+  top: 68px;
+  left: 19px;
+  transform: skewX(350deg);
 }
 
-.l_leg_2{
+.r_hand_1{
   position: absolute;
   background-color: black;
+  width: 6px;
+  height: 15px;
+  top: 30px;
+  left: 25px;
+  transform: rotate(335deg);
 }
+
+.r_hand_2{
+  position: absolute;
+  background-color: black;
+  width: 6px;
+  height: 20px;
+  top: 43px;
+  left: 30px;
+  transform: rotate(350deg);
+}
+
+
+.l_hand_1{
+  position: absolute;
+  background-color: black;
+  width: 6px;
+  height: 15px;
+  top: 30px;
+  left: 19px;
+  transform: rotate(25deg);
+}
+
+.l_hand_2{
+  position: absolute;
+  background-color: black;
+  width: 6px;
+  height: 20px;
+  top: 43px;
+  left: 14px;
+  transform: rotate(10deg);
+}
+
+/* finished a person  */
+
+
+
+/* how zombie move*/
+.zombie_way{
+  left: 300px;
+  position: relative;
+  width: 300px;
+}
+
+@keyframes move_animation_zombie {
+    0% {
+        right: 0px;
+    }
+    33% {
+        right: 100px;
+    }
+    66% {
+        right: 200px;
+    }
+    95%{
+      transform: rotate(0deg);
+    }
+    100% {
+        right: 300px;
+        transform: rotate(90deg);
+    }
+}
+
+/* animation of walig of a zombie*/
+.zombie_way > .person{
+  animation: 7s linear move_animation_zombie infinite;
+}
+
+
+@keyframes l_leg_animation_zombie {
+    0% {
+      transform: skewX(350deg);
+      left: 19px;
+      height: 35px;
+    }
+    10% {
+      transform: skewX(340deg);
+      left: 16px;
+      height: 34px;
+    }
+    20% {
+      transform: skewX(350deg);
+      left: 19px;
+      height: 35px;
+    }
+    30% {
+      transform: skewX(340deg);
+      left: 16px;
+      height: 34px;
+    }
+    40% {
+      transform: skewX(350deg);
+      left: 19px;
+      height: 35px;
+    }
+    50% {
+      transform: skewX(340deg);
+      left: 16px;
+      height: 34px;
+    }
+    60% {
+      transform: skewX(350deg);
+      left: 19px;
+      height: 35px;
+    }
+    70% {
+      transform: skewX(340deg);
+      left: 16px;
+      height: 34px;
+    }
+    80% {
+      transform: skewX(350deg);
+      left: 19px;
+      height: 35px;
+    }
+    90% {
+      transform: skewX(340deg);
+      left: 16px;
+      height: 34px;
+    }
+    95%{
+      transform: skewX(350deg) rotate(0deg);
+      left: 19px;
+      height: 35px;
+    }
+    100% {
+      transform: rotate(350deg);
+      left: 24px;
+    }
+}
+
+.zombie_way .l_leg{
+  animation: 7s linear l_leg_animation_zombie infinite;
+}
+
+@keyframes r_leg_animation_zombie {
+    0% {
+      transform: skewX(10deg);
+      height: 34px;
+      left: 25px;
+    }
+    10% {
+      transform: skewX(20deg);
+      height: 35px;
+      left: 28px;
+    }
+    20% {
+      transform: skewX(10deg);
+      height: 34px;
+      left: 25px;
+    }
+    30% {
+      transform: skewX(20deg);
+      height: 35px;
+      left: 28px;
+    }
+    40% {
+      transform: skewX(10deg);
+      height: 34px;
+      left: 25px;
+    }
+    50% {
+      transform: skewX(20deg);
+      height: 35px;
+      left: 28px;
+    }
+    60% {
+      transform: skewX(10deg);
+      height: 34px;
+      left: 25px;
+    }
+    70% {
+      transform: skewX(20deg);
+      height: 35px;
+      left: 28px;
+    }
+    80% {
+      transform: skewX(10deg);
+      height: 34px;
+      left: 25px;
+    }
+    90% {
+      transform: skewX(20deg);
+      height: 35px;
+      left: 28px;
+    }
+    95%{
+      transform: skewX(10deg) rotate(360deg);
+      height: 35px;
+      left: 25px;
+      top: 68px;
+    }
+    100% {
+      transform: rotate(340deg);
+      left: 27px;
+      top: 67px;
+    }
+}
+
+.zombie_way .r_leg{
+  animation: 7s linear r_leg_animation_zombie infinite;
+}
+
+
+.zombie_way .r_hand_2{
+  height: 35px;
+  top: 32px;
+  left: 14px;
+  transform: rotate(80deg);
+
+}
+
+.zombie_way .l_hand_2{
+  height: 30px;
+  top: 30px;
+  left: 5px;
+  transform: rotate(90deg);
+
+}
+
+/* zombie ends */
+
+/* m416 animation starts */
+
+.m416{
+  
+}
+
+
+/* test_zone*/
