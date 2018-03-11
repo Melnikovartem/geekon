@@ -3,4 +3,4 @@
 
 ?>
 
-<!-- here action POST method with action = "ans.php" !-->
+<!-- here action POST method with action = "ans.php" as body !-->
