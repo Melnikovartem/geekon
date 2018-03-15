@@ -2,6 +2,15 @@ body{
   margin: 0px;
 }
 
+/* main scene*/
+
+.scene{
+  background-color: #f0e6de;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
 /*Person's basic parts*/
 .person{
   position: relative;
@@ -68,7 +77,6 @@ body{
   transform: rotate(350deg);
 }
 
-
 .l_hand_1{
   position: absolute;
   background-color: black;
@@ -94,9 +102,10 @@ body{
 
 /* how zombie move*/
 .zombie_way{
-  left: 300px;
   position: relative;
   width: 300px;
+  /* можно рассмотреть в инструменте разработчика*/
+  height: 10px;
 }
 
 @keyframes move_animation_zombie {
@@ -120,7 +129,9 @@ body{
 
 /* animation of walig of a zombie*/
 .zombie_way > .person{
+  position: absolute;
   animation: 8s linear move_animation_zombie infinite;
+  right: 0px;
 }
 
 
@@ -329,11 +340,72 @@ body{
   left: -5px;
 }
 
-/* castle */
+/* castle and people in it */
 
 .castle{
   background-image: url('castle.jpg');
   background-size: 100%;
   height: 260px;
   width: 400px;
+  position: absolute;
+}
+
+.shooter1{
+  position: absolute;
+  left: 280px;
+  top: 157px;
+}
+
+.shooter2{
+  position: absolute;
+  left: 170px;
+  top: 157px;
+}
+
+.shooter3{
+  position: absolute;
+  left: 150px;
+  top: 28px;
+}
+
+.shooter4{
+  position: absolute;
+  left: 10px;
+  top: 157px;
+}
+
+
+/* zombie attack and zombies in it */
+
+.zombie_attack{
+  left: 500px;
+  top: 157px;
+  right: 10px;
+  height: 10px;
+  position: absolute;
+}
+
+.zombie1{
+  position: absolute;
+  right: 0px;
+}
+
+.zombie2{
+  position: absolute;
+  right: 10px;
+}
+
+.zombie3{
+  position: absolute;
+  right: -10px;
+}
+
+.zombie4{
+  position: absolute;
+  right: 20px;
+}
+
+.zombie5{
+  position: absolute;
+  right: -20px;
 }
