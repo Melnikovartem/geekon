@@ -8,6 +8,7 @@ $prize = $prizes_var[rand(0,count($prizes_var)-1)];
 
 <title>Ваш шанс!!!</title>
 
+<meta charset="utf-8">
 <link rel="stylesheet" href = "./my.css" >
 <div class = "header">
 <h1>У вас есть шанс получить <?php echo $prize[0]; ?>!!!!</h1>
