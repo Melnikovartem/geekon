@@ -102,7 +102,6 @@ body{
 
 /* how zombie move*/
 .zombie_way{
-  position: relative;
   width: 300px;
   /* можно рассмотреть в инструменте разработчика*/
   height: 10px;
@@ -133,7 +132,6 @@ body{
   animation: 8s linear move_animation_zombie infinite;
   right: 0px;
 }
-
 
 @keyframes l_leg_animation_zombie {
     0% {
@@ -296,7 +294,7 @@ body{
 /* zombie ends */
 
 
-/* m416 animation starts */
+/* guns animation starts */
 
 @keyframes m416_animation {
   0% {
@@ -321,9 +319,34 @@ body{
   z-index: 30;
 }
 
-/* shooter animaton */
+@keyframes gun_animation {
+  0% {
+    transform: rotate(360deg);
+  }
+  20% {
+    transform: rotate(340deg);
+  }
+  40% {
+    transform: rotate(360deg);
+  }
 
-.shooter .r_hand_2{
+}
+
+.big_gun{
+  position:  absolute;
+  background-image: url("big_gun.png");
+  background-size: 100%;
+  height: 40px;
+  width: 100px;
+  animation: 5s cubic-bezier(0.04, 1.14, 0.18, 0.85)   gun_animation infinite;
+  z-index: 30;
+}
+
+
+/* shooter animaton */
+.shooter {}
+
+.shooter  .r_hand_2 {
   left: 37px;
   top: 38px;
   transform: rotate(280deg);
@@ -340,6 +363,10 @@ body{
   left: -5px;
 }
 
+.shooter .big_gun{
+  top: 20px;
+  left: -5px;
+}
 /* castle and people in it */
 
 .castle{
@@ -352,8 +379,12 @@ body{
 
 .shooter1{
   position: absolute;
-  left: 280px;
-  top: 157px;
+  left: 36px;
+  top: 39px;
+}
+
+.shooter1 .m416{
+  animation-delay: 5.05s;
 }
 
 .shooter2{
@@ -362,10 +393,18 @@ body{
   top: 157px;
 }
 
+.shooter2 .m416{
+  animation-delay: 5.15s;
+}
+
 .shooter3{
   position: absolute;
   left: 150px;
   top: 28px;
+}
+
+.shooter3 .m416{
+  animation-delay: 5.21s;
 }
 
 .shooter4{
@@ -374,7 +413,31 @@ body{
   top: 157px;
 }
 
+.shooter4 .m416{
+  animation-delay: 5.33s;
+}
 
+.gunner1{
+  position: absolute;
+  left: 300px;
+  top: 39px;
+}
+
+.gunner1 .big_gun{
+  animation-delay: 8.43s
+}
+
+.gunner2{
+  position: absolute;
+  left: 280px;
+  top: 157px;
+
+
+}
+
+.gunner2 .big_gun{
+  animation-delay: 7s
+}
 /* zombie attack and zombies in it */
 
 .zombie_attack{
@@ -385,27 +448,55 @@ body{
   position: absolute;
 }
 
-.zombie1{
-  position: absolute;
-  right: 0px;
+.zombie_attack > .zombie_way{
+    position: absolute;
+    z-index: 30;
 }
 
-.zombie2{
-  position: absolute;
-  right: 10px;
+.zombie_house{
+  background-image: url('zombie_house.png');
+  background-size: 100%;
+  height: 300px;
+  width: 300px;
+  z-index: 40;
 }
 
-.zombie3{
+.zombie_attack > .zombie_house{
   position: absolute;
-  right: -10px;
+  left: 60px;
+  top: -163px;
 }
 
-.zombie4{
-  position: absolute;
-  right: 20px;
+.zombie1 .person, .zombie1 .l_leg, .zombie1 .r_leg{
+  animation-delay: 1s;
 }
-
-.zombie5{
-  position: absolute;
-  right: -20px;
+.zombie2 .person, .zombie2 .l_leg, .zombie2 .r_leg{
+  animation-delay: 0.1s;
+}
+.zombie3 .person, .zombie3 .l_leg, .zombie3 .r_leg{
+  animation-delay: 1.45s;
+}
+.zombie4 .person, .zombie4 .l_leg, .zombie4 .r_leg{
+  animation-delay: 6.33s;
+}
+.zombie5 .person, .zombie5 .l_leg, .zombie5 .r_leg{
+  animation-delay: 3.56s;
+}
+.zombie6 .person, .zombie6 .l_leg, .zombie6 .r_leg{
+  animation-delay: 5.25s;
+}
+.zombie7 .person, .zombie7 .l_leg, .zombie7 .r_leg{
+  animation-delay: 2.73s;
+}
+.zombie8 .person, .zombie8 .l_leg, .zombie8 .r_leg{
+  animation-delay: 2.21s;
+}
+.zombie9 .person, .zombie9 .l_leg, .zombie9 .r_leg{
+  animation-delay: 5.93s;
+}
+.zombie10 .person, .zombie10 .l_leg, .zombie10 .r_leg{
+  animation-delay: 3.92s;
+}
+.zombie11 .person, .zombie11 .l_leg, .zombie11.r_leg{
+  animation-delay: 6.92s;
 }
