@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>tabs</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="my.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class = "container">
+      <div class = "row">
+        <div class = "col-3 tab"> #1</div>
+        <div class = "col-3 tab"> #2</div>
+        <div class = "col-3 tab"> #3</div>
+        <div class = "col-3 tab"> #4</div>
+      </div>
+    </div>
+    <div class = "content gif gif1" >You watch TV</div>
+    <div class = "content gif gif2" >Evrything is fine</div>
+    <div class = "content gif gif3" >What?</div>
+    <div class = "content gif gif4" >???</div>
+    <script>
+      var tabs = document.getElementsByClassName("tab");
+      var content = document.getElementsByClassName("content");
+      window.localStorage.active_tab = 0;
+      function a(i, tabs, content){
+        return function(){
+          tabs[window.localStorage.active_tab].style.backgroundColor = "#ffffff";
+          content[window.localStorage.active_tab].style.display = "none";
+          window.localStorage.active_tab = i;
+          tabs[i].style.backgroundColor = "red";
+          content[i].style.display = "block";
+        }
+      }
+      for(var i = 0; i<tabs.length; i++){
+        tabs[i].addEventListener('click', a(i, tabs, content));
+      }
+    </script>
+  </body>
+</html>
