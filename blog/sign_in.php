@@ -91,6 +91,7 @@ else if($user_status == 2){
       </div>
       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name = "password">
     </div>
+    <p>Don't have account yet? <a href = "sign_up.php">Sign up!</a></p>
     <button type="submit" class="btn btn-outline-success">Sing in</button>
   </form>
 </div>

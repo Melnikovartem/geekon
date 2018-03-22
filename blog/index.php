@@ -48,6 +48,12 @@ else if($user_status == 2){
 //same part ends
 
 //have to generate body
+
+$data= json_decode(file_get_contents('server'), true);
+$connection = mysqli_connect($data[0], $data[1], $data[2]);
+mysqli_select_db($connection, 'blog');
+mysqli_set_charset($connection, 'utf8');
+
 ?>
 
 <meta charset="utf-8">
@@ -74,33 +80,27 @@ else if($user_status == 2){
     </div>
   <!-- same heading ends -->
 
-
-  <div class = "row article">
-    <div class = "col-1"></div>
-    <div class="card col">
-      <div class="card-body d-flex flex-column align-items-start">
-        <h3 class="mb-0">
-          <a class="text-dark" href="#">Featured post</a>
-        </h3>
-        <div class="mb-1 text-muted">Nov 12</div>
-        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-        <a href="#">Continue reading</a>
-      </div>
-    </div>
-    <div class = "col-1 "></div>
-  </div>
-  <div class = "row article">
-    <div class = "col-1"></div>
-    <div class="card col">
-      <div class="card-body d-flex flex-column align-items-start">
-        <h3 class="mb-0">
-          <a class="text-dark" href="#">Featured post</a>
-        </h3>
-        <div class="mb-1 text-muted">Nov 12</div>
-        <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-        <a href="#">Continue reading</a>
-      </div>
-    </div>
-    <div class = "col-1 "></div>
-  </div>
-</div>
+<?php
+$query_result = mysqli_query($connection, 'SELECT header, id, user_id, time, text FROM articles ORDER BY time DESC');
+$article = mysqli_fetch_all($query_result);
+foreach ($article as $article) {
+  $username = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = ' . $article[2]))[0];
+  if(!$username)
+    $username = ["Deleted User"];
+  echo '<div class = "row article">
+          <div class = "col-1"></div>
+          <div class="card col">
+            <div class="card-body d-flex flex-column align-items-start">
+              <h3 class="mb-0">
+                <a class="text-dark" href="article.php?id=' . $article[1] . '">' . $article[0] . '</a>
+              </h3>
+              <a href="user.php?id=' . $article[2] . '">by '. $username[0] . '</a>
+              <div class="mb-1 text-muted"> ' . $article[3] . '</div>
+              <p class="card-text mb-auto">' . substr($article[4], 0, 80) . '</p>
+              <a href="article.php?id=' . $article[1] . '">Continue reading</a>
+            </div>
+          </div>
+          <div class = "col-1 "></div>
+        </div>';
+}
+?>
