@@ -1,0 +1,46 @@
+.menu{
+  background-color: #f9a03f;
+  display: flex;
+  align-items: center;
+  height: 60px;;
+}
+
+.btn-outline-dark{
+  width: 150px;
+}
+
+.logo{
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.menu .sign_out{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.p-2{
+  color: black;
+}
+
+.card{
+  margin-top: 12px;
+}
+
+form{
+  margin-top: 15px;
+}
+
+.data{
+  height: calc(100% - 120px);
+  display: flex;
+  align-items: center;
+}
+
+.field{
+  width: 100%;
+  margin: 5%;
+}

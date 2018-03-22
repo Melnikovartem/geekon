@@ -16,14 +16,33 @@ if(isset($_SESSION[$_COOKIE["blog"]]))
 
 //choose header
 $header = "";
+//new user
 if($user_status = 0){
-  $header = "";
+  $header = '';
 }
+//loged in user
 else if($user_status = 1){
-  $header = "";
+  $header = '
+  <a class="p-2" href="sign_in.php"><strong>My artciles</strong></a>
+  <a class="p-2" href="#"><strong>New article</strong></a>
+  <a class="p-2" href="#"><strong>My profile</strong></a>';
 }
+//admin
 else if($user_status = 2){
-  $header = "";
+  $header = '
+  <a class="p-2" href="#"><strong>My artciles</strong></a>
+  <a class="p-2" href="#"><strong>New article</strong></a>
+  <a class="p-2" href="#"><strong>Edit users</strong></a>
+  <a class="p-2" href="#"><strong>My profile</strong></a>';
+}
+//god admin
+  else if($user_status = 3){
+    $header = '
+    <a class="p-2" href="#"><strong>My artciles</strong></a>
+    <a class="p-2" href="#"><strong>New article</strong></a>
+    <a class="p-2" href="#"><strong>Edit users</strong></a>
+    <a class="p-2" href="#"><strong>Edit admins</strong></a>
+    <a class="p-2" href="#"><strong>My profile</strong></a>';
 }
 //header ends
 //same part ends
@@ -53,6 +72,9 @@ else if($user_status = 2){
     </div>
     <div class = "col-2 sign_out"><button class='btn btn-outline-dark'>Sign out</button></div>
   </div>
+  <!-- same heading ends -->
+
+
   <div class = "row article">
     <div class = "col-1"></div>
     <div class="card col">
