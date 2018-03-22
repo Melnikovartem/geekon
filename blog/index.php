@@ -8,47 +8,46 @@ session_start();
 //user status
 $user_status = 0; //new user
 if(isset($_SESSION[$_COOKIE["blog"]]))
-  $user_status = $_SESSION[$_COOKIE["blog"]]; //real status
-
+  if($_SESSION[$_COOKIE["blog"]] != "")
+    $user_status = $_SESSION[$_COOKIE["blog"]]; //real status
 //---here can be some code
 
 //code ends
 
 //choose header
-$header = "";
+$header = ['<a class="p-2" href="index.php"><strong>Best blog you have ever met!</strong></a>', 'Sign out</button>'];
 //new user
-if($user_status = 0){
-  $header = '';
+if($user_status == 0){
+  $header[1] = 'Sign in';
 }
 //loged in user
-else if($user_status = 1){
-  $header = '
-  <a class="p-2" href="sign_in.php"><strong>My artciles</strong></a>
-  <a class="p-2" href="#"><strong>New article</strong></a>
-  <a class="p-2" href="#"><strong>My profile</strong></a>';
+else if($user_status == 1){
+  $header[0] = '
+  <a class="p-2" href="user_articles"><strong>My artciles</strong></a>
+  <a class="p-2" href="new_article.php"><strong>New article</strong></a>
+  <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //admin
-else if($user_status = 2){
-  $header = '
-  <a class="p-2" href="#"><strong>My artciles</strong></a>
-  <a class="p-2" href="#"><strong>New article</strong></a>
-  <a class="p-2" href="#"><strong>Edit users</strong></a>
-  <a class="p-2" href="#"><strong>My profile</strong></a>';
+else if($user_status == 2){
+  $header[0] = '
+  <a class="p-2" href="user_articles"><strong>My artciles</strong></a>
+  <a class="p-2" href="new_article.php"><strong>New article</strong></a>
+  <a class="p-2" href="edit_users.php"><strong>Edit users</strong></a>
+  <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //god admin
-  else if($user_status = 3){
-    $header = '
-    <a class="p-2" href="#"><strong>My artciles</strong></a>
-    <a class="p-2" href="#"><strong>New article</strong></a>
-    <a class="p-2" href="#"><strong>Edit users</strong></a>
-    <a class="p-2" href="#"><strong>Edit admins</strong></a>
-    <a class="p-2" href="#"><strong>My profile</strong></a>';
+  else if($user_status == 3){
+    $header[0] = '
+    <a class="p-2" href="user_articles"><strong>My artciles</strong></a>
+    <a class="p-2" href="new_article.php"><strong>New article</strong></a>
+    <a class="p-2" href="edit_users.php"><strong>Edit users</strong></a>
+    <a class="p-2" href="edit_admin.php"><strong>Edit admins</strong></a>
+    <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //header ends
 //same part ends
 
 //have to generate body
-
 ?>
 
 <meta charset="utf-8">
@@ -66,12 +65,13 @@ else if($user_status = 2){
     <div class="float-right col">
       <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-          <?php echo $header?>
+          <?php echo $header[0];?>
         </nav>
       </div>
     </div>
-    <div class = "col-2 sign_out"><button class='btn btn-outline-dark'>Sign out</button></div>
-  </div>
+    <div class = "col-2 sign_out"><form action = "<?php if($user_status == 0) echo "sign_in"; else echo "ans"?>.php">
+      <button class="btn btn-outline-dark"><?php echo $header[1]; ?></button></form></div>
+    </div>
   <!-- same heading ends -->
 
 
