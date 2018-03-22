@@ -49,6 +49,7 @@ else if($user_status == 2){
 
 //have to generate body
 
+//connect to db
 $data= json_decode(file_get_contents('server'), true);
 $connection = mysqli_connect($data[0], $data[1], $data[2]);
 mysqli_select_db($connection, 'blog');
