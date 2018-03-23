@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>X_O</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="my.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class = "container">
+      <div class = "row">
+        <div class = "col-4 place"> <img src = "X.png"><img src = "O.png"></div>
+        <div class = "col-4 place"> <img src = "X.png"><img src = "O.png"></div>
+        <div class = "col-4 place"> <img src = "X.png"><img src = "O.png"></div>
+      </div>
+      <div class = "row">
+        <div class = "col-4 place"> <img src = "X.png"><img src = "O.png"></div>
+        <div class = "col-4 place"> <img src = "X.png"><img src = "O.png"></div>
+        <div class = "col-4 place"> <img src = "X.png"><img src = "O.png"></div>
+      </div>
+      <div class = "row">
+        <div class = "col-4 place"> <img src = "X.png"><img src = "O.png"></div>
+        <div class = "col-4 place"> <img src = "X.png"><img src = "O.png"></div>
+        <div class = "col-4 place"> <img src = "X.png"><img src = "O.png"></div>
+      </div>
+      <div class = "row">
+        <div class = "menu col-2">Active: <div id = "active"><div></div><img src = "X.png"><img src = "O.png"></div></div>
+        <div class = "menu col"><button class='btn btn-outline-danger' id = "reset">Reset</button></div>
+      </div>
+    </div>
+    <script>
+      var empty = "000000000";
+      window.localStorage.game = empty;
+      window.localStorage.active = 1;
+      var place = document.getElementsByClassName("place");
+      update();
+      function a(i){
+        return function(){
+          if(!place[i].classList.contains("full")){
+            str = window.localStorage.game;
+            window.localStorage.game = str.substr(0,i) + window.localStorage.active + str.substr(i+1);
+            window.localStorage.active = window.localStorage.active==1?2:1;
+            update();
+          }
+        }
+      }
+      function update(){
+        for(var i = 0; i<place.length; i++){
+          if(window.localStorage.game[i]){
+            if(window.localStorage.game[i] != 0)
+              place[i].childNodes[window.localStorage.game[i]].style.display = "block";
+            else {
+              place[i].childNodes[1].style.display = "none";
+              place[i].childNodes[2].style.display = "none";
+            }
+          }
+          if(window.localStorage.game[i]!=0)
+            place[i].classList.add("full");
+          else
+            place[i].classList.remove("full");
+          document.getElementById("active").childNodes[window.localStorage.active].style.display = "block";
+          document.getElementById("active").childNodes[window.localStorage.active==1?2:1].style.display = "none";
+        }
+      }
+      function reset(){
+        window.localStorage.game = empty;
+        window.localStorage.active = 1;
+        update();
+      }
+
+      document.getElementById("reset").addEventListener('click', function(){return reset(place)});
+      for(var i = 0; i<place.length; i++){
+        place[i].addEventListener('click', a(i));
+      }
+    </script>
+  </body>
+</html>
