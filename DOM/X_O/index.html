@@ -27,7 +27,7 @@
         <div class = "menu col"><button class='btn btn-outline-danger' id = "reset">Reset</button></div>
       </div>
       <div class = "row">
-        <div class = "menu col" id = "winner_tab"><h1>Winner:</h1> <div id = "winner"><img src = "X.png"><img src = "O.png"><h1>No winner! Draw!<h1></div></div>
+        <div class = "menu col"><h1 class = "winner">Winner is X!<h1><h1 class = "winner">Winner is O!<h1><h1 class = "winner">No winner! Draw!<h1></div></div>
       </div>
     </div>
     <script>
@@ -59,13 +59,10 @@
         for(var i = 0; i<place.length; i++){
           place[i].classList.add("finished");
         }
-        document.getElementById("winner_tab").style.display = "block";
-        document.getElementById("winner").childNodes[window.localStorage.winner-1].style.display = "block";
+        console.log(document.getElementsByClassName("winner"))
+        document.getElementsByClassName("winner")[window.localStorage.winner-1].style.display = "block";
       }
       function update(){
-        if(window.localStorage.winner != 0){
-          winned();
-        }
         for(var i = 0; i<place.length; i++){
           if(window.localStorage.game[i]){
             if(window.localStorage.game[i] != 0)
@@ -82,14 +79,16 @@
           if(place[i].classList.contains("finished"))
             place[i].classList.remove("finished");
           document.getElementById("active").childNodes[window.localStorage.active].style.display = "block";
-          document.getElementById("active").childNodes[window.localStorage.active==1?2:1].style.display = "none";
+          document.getElementById("active").childNodes[window.localStorage.active==1?2:1].style.display = "none"
+        }
+        if(window.localStorage.winner != 0){
+          winned();
         }
       }
       function reset(){
         window.localStorage.game = empty;
         window.localStorage.active = 1;
-        document.getElementById("winner_tab").style.display = "none";
-        document.getElementById("winner").childNodes[window.localStorage.winner-1].style.display = "none";
+        document.getElementsByClassName("winner")[window.localStorage.winner-1].style.display = "none";
         window.localStorage.winner = 0;
         update();
       }
