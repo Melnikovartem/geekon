@@ -9,9 +9,6 @@
 .container{
   margin-top: 3%;
 }
-.content{
-  display: none;
-}
 
 .menu{
   margin-top: 20px;
@@ -25,5 +22,9 @@
 img{
   max-width: 100%;
   max-height: 100%;
+  display: none;
+}
+
+#winner_tab{
   display: none;
 }

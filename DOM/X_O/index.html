@@ -26,24 +26,46 @@
         <div class = "menu col-2">Active: <div id = "active"><div></div><img src = "X.png"><img src = "O.png"></div></div>
         <div class = "menu col"><button class='btn btn-outline-danger' id = "reset">Reset</button></div>
       </div>
+      <div class = "row">
+        <div class = "menu col" id = "winner_tab"><h1>Winner:</h1> <div id = "winner"><img src = "X.png"><img src = "O.png"><h1>No winner! Draw!<h1></div></div>
+      </div>
     </div>
     <script>
       var empty = "000000000";
       window.localStorage.game = empty;
       window.localStorage.active = 1;
+      window.localStorage.winner = 0;
+      if(!window.localStorage.win_O)
+        window.localStorage.win_O = 0;
+      if(!window.localStorage.win_X)
+        window.localStorage.win_O = 0;
+      if(!window.localStorage.draw)
+        window.localStorage.draw = 0;
+
       var place = document.getElementsByClassName("place");
       update();
       function a(i){
         return function(){
-          if(!place[i].classList.contains("full")){
+          if(!place[i].classList.contains("full") && !place[i].classList.contains("finished")){
             str = window.localStorage.game;
             window.localStorage.game = str.substr(0,i) + window.localStorage.active + str.substr(i+1);
             window.localStorage.active = window.localStorage.active==1?2:1;
+            check()
             update();
           }
         }
       }
+      function winned(){
+        for(var i = 0; i<place.length; i++){
+          place[i].classList.add("finished");
+        }
+        document.getElementById("winner_tab").style.display = "block";
+        document.getElementById("winner").childNodes[window.localStorage.winner-1].style.display = "block";
+      }
       function update(){
+        if(window.localStorage.winner != 0){
+          winned();
+        }
         for(var i = 0; i<place.length; i++){
           if(window.localStorage.game[i]){
             if(window.localStorage.game[i] != 0)
@@ -57,6 +79,8 @@
             place[i].classList.add("full");
           else
             place[i].classList.remove("full");
+          if(place[i].classList.contains("finished"))
+            place[i].classList.remove("finished");
           document.getElementById("active").childNodes[window.localStorage.active].style.display = "block";
           document.getElementById("active").childNodes[window.localStorage.active==1?2:1].style.display = "none";
         }
@@ -64,9 +88,43 @@
       function reset(){
         window.localStorage.game = empty;
         window.localStorage.active = 1;
+        document.getElementById("winner_tab").style.display = "none";
+        document.getElementById("winner").childNodes[window.localStorage.winner-1].style.display = "none";
+        window.localStorage.winner = 0;
         update();
       }
 
+      function check(){
+        var i,j,a,ans;
+        var data = window.localStorage.game;
+        //check lines
+          for(i=0; i<9; i+=3){
+            a = [];
+            for(j=i; j<i+3; j++)
+              a.push(data[j]);
+            if(a[0] == a[1] && a[1] == a[2] && a[0] != "0")
+              window.localStorage.winner = a[0];
+          }
+        //check rows
+          for(i=0; i<3; i++){
+            a = [];
+            for(j=i; j<9; j+=3)
+              a.push(data[j]);
+            if(a[0] == a[1] && a[1] == a[2] && a[0] != "0")
+              window.localStorage.winner = a[0];
+          }
+
+        //check other
+          a = [data[0], data[4], data[8]];
+          if(a[0] == a[1] && a[1] == a[2] && a[0] != "0")
+            window.localStorage.winner = a[0];
+          a = [data[2], data[4], data[6]];
+          if(a[0] == a[1] && a[1] == a[2] && a[0] != "0")
+            window.localStorage.winner = a[0];
+
+          if(window.localStorage.winner == 0 && data.indexOf("0") == -1)
+            window.localStorage.winner = 3;
+      }
       document.getElementById("reset").addEventListener('click', function(){return reset(place)});
       for(var i = 0; i<place.length; i++){
         place[i].addEventListener('click', a(i));
