@@ -35,15 +35,17 @@
     </div>
     <script>
       var empty = "000000000";
-      window.localStorage.game = empty;
-      window.localStorage.active = 1;
-      window.localStorage.winner = 0;
+      if(!window.localStorage.game)
+        window.localStorage.game = empty;
+      if(!window.localStorage.active)
+        window.localStorage.active = 1;
       if(!window.localStorage.win_O)
         window.localStorage.win_O = 0;
       if(!window.localStorage.win_X)
         window.localStorage.win_X = 0;
       if(!window.localStorage.draw)
         window.localStorage.draw = 0;
+      window.localStorage.winner = 0;
 
       var place = document.getElementsByClassName("place");
       update();
@@ -53,7 +55,10 @@
             str = window.localStorage.game;
             window.localStorage.game = str.substr(0,i) + window.localStorage.active + str.substr(i+1);
             window.localStorage.active = window.localStorage.active==1?2:1;
-            check()
+            check();
+            if(window.localStorage.winner != 0){
+              winned();
+            }
             update();
           }
         }
@@ -88,9 +93,6 @@
             place[i].classList.remove("finished");
           document.getElementById("active").childNodes[window.localStorage.active].style.display = "block";
           document.getElementById("active").childNodes[window.localStorage.active==1?2:1].style.display = "none"
-        }
-        if(window.localStorage.winner != 0){
-          winned();
         }
         document.getElementById("score").innerHTML = "Score -> X:Draw:O -> " + window.localStorage.win_X + ":" + window.localStorage.draw + ":" + window.localStorage.win_O;
       }
