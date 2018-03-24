@@ -65,7 +65,7 @@
       }
       function winned(){
         for(var i = 0; i<place.length; i++){
-          place[i].classList.add("finished");
+          place[i].classList.add("full");
         }
         document.getElementsByClassName("winner")[window.localStorage.winner-1].style.display = "block";
         if(window.localStorage.winner == 1)
@@ -87,16 +87,14 @@
           }
           if(window.localStorage.game[i]!=0)
             place[i].classList.add("full");
-          else
-            place[i].classList.remove("full");
-          if(place[i].classList.contains("finished"))
-            place[i].classList.remove("finished");
           document.getElementById("active").childNodes[window.localStorage.active].style.display = "block";
           document.getElementById("active").childNodes[window.localStorage.active==1?2:1].style.display = "none"
         }
         document.getElementById("score").innerHTML = "Score -> X:Draw:O -> " + window.localStorage.win_X + ":" + window.localStorage.draw + ":" + window.localStorage.win_O;
       }
       function reset(){
+        for(var i = 0; i<place.length; i++)
+          place[i].classList.remove("full");
         window.localStorage.game = empty;
         window.localStorage.active = 1;
         for(var i =0; i<3; i++)
