@@ -28,3 +28,20 @@ img{
 .winner{
   display: none;
 }
+
+#score{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.footer{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer .btn-outline-danger{
+  height: 150px;
+  width: 250px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
