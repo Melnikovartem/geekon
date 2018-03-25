@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ContactsController@index');
+Route::get('/add', 'ContactsController@addForm');
+Route::get('/contact/{id}', 'ContactsController@details');
+Route::get('/contact/{id}/edit', 'ContactsController@editForm');
+
+Route::post('/add', 'ContactsController@add');
+Route::post('/contact/{id}/edit', 'ContactsController@edit');
+Route::get('/contact/{id}/delete', 'ContactsController@delete');
