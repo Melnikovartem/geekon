@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MathHelperController@Index');
+Route::get('/h', 'MathHelperController@H');
+Route::get('/p', 'MathHelperController@P');
+Route::get('/r', 'MathHelperController@R');
