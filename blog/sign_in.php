@@ -77,9 +77,9 @@ else if($user_status == 2){
 </div>
   <!-- same heading ends -->
 
-<!-- here action POST method with action = "ans.php" as body !-->
+<!-- here action POST method with action = "ans_user.php" as body !-->
 <div class = "data">
-  <form  class = "field" method = "POST" action = "ans.php">
+  <form  class = "field" method = "POST" action = "ans_user.php">
     <input type = "hidden" name = "type" value="sign inx">
     <div class="input-group mb-3 h-10">
       <div class="input-group-prepend">
