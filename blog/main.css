@@ -44,3 +44,33 @@ form{
   width: 100%;
   margin: 5%;
 }
+
+.user_link{
+  color: black;
+}
+
+.card-body h4{
+  align-self: flex-end;
+}
+
+.name{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.name h2{
+  align-self: flex-end;
+}
+
+#article{
+  margin-top: 10px;
+}
+
+#leave_comment{
+  margin-top: 5%;
+}
+
+#comments{
+  margin-top: 5%;
+}

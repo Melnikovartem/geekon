@@ -82,30 +82,34 @@ mysqli_set_charset($connection, 'utf8');
       </form>
     </div>
   </div>
-</div>
   <!-- same heading ends -->
 
-<?php
-$query_result = mysqli_query($connection, 'SELECT header, id, user_id, time, text FROM articles ORDER BY time DESC');
-$article = mysqli_fetch_all($query_result);
-foreach ($article as $article) {
-  $username = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = ' . $article[2]))[0];
-  if(!$username)
-    $username = ["Deleted User"];
-  echo '<div class = "row article">
-          <div class = "col-1"></div>
-          <div class="card col">
-            <div class="card-body d-flex flex-column align-items-start">
-              <h3 class="mb-0">
-                <a class="text-dark" href="article.php?id=' . $article[1] . '">' . $article[0] . '</a>
-              </h3>
-              <a href="user.php?id=' . $article[2] . '">by '. $username[0] . '</a>
-              <div class="mb-1 text-muted"> ' . $article[3] . '</div>
-              <p class="card-text mb-auto">' . substr($article[4], 0, 80) . '</p>
-              <a href="article.php?id=' . $article[1] . '">Continue reading</a>
+  <?php
+  $query_result = mysqli_query($connection, 'SELECT header, id, user_id, time, text FROM articles ORDER BY time DESC');
+  $article = mysqli_fetch_all($query_result);
+  foreach ($article as $article) {
+    $username = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = ' . $article[2]))[0];
+    if(!$username)
+      $username = ["Deleted User"];
+    echo '<div class = "row article">
+            <div class = "col-1"></div>
+            <div class="card col">
+              <div class="card-body d-flex flex-column align-items-start">
+                <h3 class="mb-0">
+                  <a class="text-dark" href="article.php?id=' . $article[1] . '">' . $article[0] . '</a>
+                </h3>';
+
+    if($user_status > 1 or $_GET['id'] == $_SESSION[$_COOKIE["blog"] . "id"]){
+      echo'<h4><a href = "edit_article.php?id=' . $_GET['id'] . '">Edit</a></h4>';
+    }
+    echo       '<a class = "user_link" href="user.php?id=' . $article[2] . '">by '. $username[0] . '</a>
+                <div class="mb-1 text-muted"> ' . $article[3] . '</div>
+                <p class="card-text mb-auto">' . substr($article[4], 0, 80) . '</p>
+                <a href="article.php?id=' . $article[1] . '">Continue reading</a>
+              </div>
             </div>
-          </div>
-          <div class = "col-1 "></div>
-        </div>';
-}
-?>
+            <div class = "col-1 "></div>
+          </div>';
+  }
+  ?>
+</div>

@@ -56,6 +56,7 @@ if(isset($_POST["username"]) and isset($_POST["password"])){
 else{
   $body = "<div class='alert alert-success' role='alert'>You signed out!</div>";
   $_SESSION[$_COOKIE["blog"]] = 0; //wanted to log out or just refreshed the page(his mistake) )
+  $_SESSION[$_COOKIE["blog"] . "id"] = -1;
   $user_status = 0;
 }
 //code ends

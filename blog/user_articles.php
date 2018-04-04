@@ -107,8 +107,12 @@ if(isset($id)){
               <div class="card-body d-flex flex-column align-items-start">
                 <h3 class="mb-0">
                   <a class="text-dark" href="article.php?id=' . $article[1] . '">' . $article[0] . '</a>
-                </h3>
-                <a href="user.php?id=' . $article[2] . '">by '. $username[0] . '</a>
+                </h3>';
+
+    if($user_status > 1 or $_GET['id'] == $_SESSION[$_COOKIE["blog"] . "id"]){
+      echo'<h4><a href = "edit_article.php?id=' . $_GET['id'] . '">Edit</a></h4>';
+    }
+    echo       '<a class = "user_link" href="user.php?id=' . $article[2] . '">by '. $username[0] . '</a>
                 <div class="mb-1 text-muted"> ' . $article[3] . '</div>
                 <p class="card-text mb-auto">' . substr($article[4], 0, 80) . '</p>
                 <a href="article.php?id=' . $article[1] . '">Continue reading</a>
