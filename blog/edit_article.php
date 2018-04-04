@@ -110,7 +110,7 @@ if(isset($_GET["id"]) ){
 else
   echo "<div class='alert alert-danger' role='alert'>Error: empty article id!</div>";
 
-if($user_status > 1 or $_POST['id'] == $_SESSION[$_COOKIE["blog"] . "id"]){
+if($user_status > 1 or $_GET['id'] == $_SESSION[$_COOKIE["blog"] . "id"]){
     echo '<input type = "hidden" name = "id" value = ' . $_GET["id"] . '>
     <button type="submit" class="btn btn-outline-success">Edit</button>';
 }

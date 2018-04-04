@@ -99,8 +99,8 @@ mysqli_set_charset($connection, 'utf8');
                   <a class="text-dark" href="article.php?id=' . $article[1] . '">' . $article[0] . '</a>
                 </h3>';
 
-    if($user_status > 1 or $_GET['id'] == $_SESSION[$_COOKIE["blog"] . "id"]){
-      echo'<h4><a href = "edit_article.php?id=' . $_GET['id'] . '">Edit</a></h4>';
+    if($user_status > 1 or $article[1] == $_SESSION[$_COOKIE["blog"] . "id"]){
+      echo'<h4><a href = "edit_article.php?id=' . $article[1] . '">Edit</a></h4>';
     }
     echo       '<a class = "user_link" href="user.php?id=' . $article[2] . '">by '. $username[0] . '</a>
                 <div class="mb-1 text-muted"> ' . $article[3] . '</div>
