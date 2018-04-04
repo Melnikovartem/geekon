@@ -107,6 +107,7 @@ mysqli_set_charset($connection, 'utf8');
                 <a href="article.php?id=' . $article[1] . '">Continue reading</a>
               </div>
             </div>
+            <div class = "col-1 "></div>
           </div>';
   }
   ?>

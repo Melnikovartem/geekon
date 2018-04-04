@@ -107,7 +107,7 @@ mysqli_set_charset($connection, 'utf8');
       echo 'god admin';
     else
       echo 'Error status!!!!';
-    echo    '</h4><a href = "user_articles.php?id=' . $user[0] . '">User’s articles</a></div></div></div>';
+    echo    '</h4><a href = "user_articles.php?id=' . $user[0] . '">User’s articles</a></div></div><div class = "col-1"></div></div>';
   }
   ?>
 

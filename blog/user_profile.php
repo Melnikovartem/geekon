@@ -83,3 +83,39 @@ mysqli_set_charset($connection, 'utf8');
   </div>
 </div>
   <!-- same heading ends -->
+
+<?php
+if(isset($_GET["id"])){
+  $id = [intval($_GET["id"]), 0]; //just another user
+  if($user_status > 1)// admin
+    $id = [intval($_GET["id"]), 1];
+}
+else if(isset($_SESSION[$_COOKIE["blog"] . "id"]))
+  $id = [$_SESSION[$_COOKIE["blog"] . "id"], 1]; //owner of artcles
+
+if(isset($id)){
+  $query_result = mysqli_query($connection, 'SELECT id, username, email, about, status FROM users WHERE id = ' . $id[0]);
+  $user = mysqli_fetch_all($query_result)[0];
+  if(isset($user)){
+    echo ' <div class = "col"> <h1 class="mb-0" style = "margin-bottom:.5rem!important;  margin-top: 10px;">
+            <a class="text-dark" href="user_profile.php?id=' . $user[0] . '">' . $user[1] . '</a>
+          </h1>';
+    if($user_status > 2 or $_SESSION[$_COOKIE["blog"] . "id"] == $user[0]){
+        echo'<h6>' . $user[2] . '</h6>';
+    }
+    echo       '<p style = "margin-bottom:.5rem"><big>About:</big> '. ($user[3]=='' ? "---" :$user[3]) . '</p><h4> status: ';
+    if($user[4] == 1)
+      echo 'basic user';
+    else if($user[3] == 2)
+      echo 'admin';
+    else if($user[4] == 3)
+      echo 'god admin';
+    else
+      echo 'error';
+    echo    '</h4><a href = "user_articles.php?id=' . $user[0] . '">User’s articles</a></div>';
+  }
+}
+else{
+  echo "<div class='alert alert-danger' role='alert'>Error: Empty id!</div>";
+}
+?>
