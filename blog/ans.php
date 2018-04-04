@@ -111,7 +111,7 @@ else if($user_status == 2){
 
 <div class = "container-fluid">
   <div class = "row menu">
-      <div class = "col logo"><a href = "/"><h1>Welcome to BB!</h1></a></div>
+      <div class = "col logo"><a href = index.php><h1>Welcome to BB!</h1></a></div>
       </div>
   <div class = "row menu">
     <div class="float-right col">
