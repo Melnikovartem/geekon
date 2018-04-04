@@ -32,7 +32,7 @@ else if($user_status == 2){
   $header[0] = '
   <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
   <a class="p-2" href="new_article.php"><strong>New article</strong></a>
-  <a class="p-2" href="all_user.php.php"><strong>All users</strong></a>
+  <a class="p-2" href="all_users.php"><strong>All users</strong></a>
   <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //god admin
@@ -40,7 +40,7 @@ else if($user_status == 2){
     $header[0] = '
     <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
     <a class="p-2" href="new_article.php"><strong>New article</strong></a>
-    <a class="p-2" href="all_user.php.php"><strong>Edit users</strong></a>
+    <a class="p-2" href="all_users.php"><strong>Edit users</strong></a>
     <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //header ends
@@ -85,8 +85,8 @@ mysqli_set_charset($connection, 'utf8');
 
   <?php
   $query_result = mysqli_query($connection, 'SELECT header, id, user_id, time, text FROM articles ORDER BY time DESC');
-  $article = mysqli_fetch_all($query_result);
-  foreach ($article as $article) {
+  $articles = mysqli_fetch_all($query_result);
+  foreach ($articles as $article) {
     $username = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = ' . $article[2]))[0];
     if(!$username)
       $username = ["Deleted User"];
@@ -107,7 +107,6 @@ mysqli_set_charset($connection, 'utf8');
                 <a href="article.php?id=' . $article[1] . '">Continue reading</a>
               </div>
             </div>
-            <div class = "col-1 "></div>
           </div>';
   }
   ?>

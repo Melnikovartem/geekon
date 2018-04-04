@@ -32,7 +32,7 @@ else if($user_status == 2){
   $header[0] = '
   <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
   <a class="p-2" href="new_article.php"><strong>New article</strong></a>
-  <a class="p-2" href="all_user.php.php"><strong>All users</strong></a>
+  <a class="p-2" href="all_users.php"><strong>All users</strong></a>
   <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //god admin
@@ -40,7 +40,7 @@ else if($user_status == 2){
     $header[0] = '
     <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
     <a class="p-2" href="new_article.php"><strong>New article</strong></a>
-    <a class="p-2" href="all_user.php.php"><strong>Edit users</strong></a>
+    <a class="p-2" href="all_users.php"><strong>Edit users</strong></a>
     <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //header ends
@@ -82,3 +82,33 @@ mysqli_set_charset($connection, 'utf8');
     </div>
   </div>
   <!-- same heading ends -->
+
+
+  <?php
+  $query_result = mysqli_query($connection, 'SELECT id, username, email, about, status FROM users ORDER BY time DESC');
+  $users = mysqli_fetch_all($query_result);
+  foreach ($users as $user) {
+    echo '<div class = "row article">
+            <div class = "col-1"></div>
+            <div class="card col">
+              <div class="card-body d-flex flex-column align-items-start">
+                <h3 class="mb-0">
+                  <a class="text-dark" href="user_profile.php?id=' . $user[0] . '">' . $user[1] . '</a>
+                </h3>';
+    if($user_status > 2 or $_SESSION[$_COOKIE["blog"] . "id"] == $user[0]){
+        echo'<h4>' . $user[2] . '</h4>';
+    }
+    echo       '<p> <big>About:</big> '. ($user[3]=='' ? "None!!!" :$user[3]) . '</p><h4>';
+    if($user[4] == 1)
+      echo 'basic user';
+    else if($user[3] == 2)
+      echo 'admin';
+    else if($user[4] == 3)
+      echo 'god admin';
+    else
+      echo 'Error status!!!!';
+    echo    '</h4><a href = "user_articles.php?id=' . $user[0] . '">User’s articles</a></div></div></div>';
+  }
+  ?>
+
+</div>

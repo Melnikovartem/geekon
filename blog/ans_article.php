@@ -59,7 +59,7 @@ else if($user_status == 2){
   $header[0] = '
   <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
   <a class="p-2" href="new_article.php"><strong>New article</strong></a>
-  <a class="p-2" href="all_user.php.php"><strong>All users</strong></a>
+  <a class="p-2" href="all_users.php"><strong>All users</strong></a>
   <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //god admin
@@ -67,7 +67,7 @@ else if($user_status == 2){
     $header[0] = '
     <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
     <a class="p-2" href="new_article.php"><strong>New article</strong></a>
-    <a class="p-2" href="all_user.php.php"><strong>Edit users</strong></a>
+    <a class="p-2" href="all_users.php"><strong>Edit users</strong></a>
     <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //header ends

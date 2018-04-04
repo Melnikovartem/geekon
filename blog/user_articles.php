@@ -32,7 +32,7 @@ else if($user_status == 2){
   $header[0] = '
   <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
   <a class="p-2" href="new_article.php"><strong>New article</strong></a>
-  <a class="p-2" href="all_user.php.php"><strong>All users</strong></a>
+  <a class="p-2" href="all_users.php"><strong>All users</strong></a>
   <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //god admin
@@ -40,7 +40,7 @@ else if($user_status == 2){
     $header[0] = '
     <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
     <a class="p-2" href="new_article.php"><strong>New article</strong></a>
-    <a class="p-2" href="all_user.php.php"><strong>Edit users</strong></a>
+    <a class="p-2" href="all_users.php"><strong>Edit users</strong></a>
     <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //header ends
@@ -108,7 +108,7 @@ if(isset($id)){
                   <a class="text-dark" href="article.php?id=' . $article[1] . '">' . $article[0] . '</a>
                 </h3>';
 
-    if($user_status > 1 or $article[1] == $_SESSION[$_COOKIE["blog"] . "id"]){
+    if($id[1]){
       echo'<h4><a href = "edit_article.php?id=' . $article[1] . '">Edit</a></h4>';
     }
     echo       '<a class = "user_link" href="user_profile.php?id=' . $article[2] . '">by '. $username[0] . '</a>
@@ -117,7 +117,6 @@ if(isset($id)){
                 <a href="article.php?id=' . $article[1] . '">Continue reading</a>
               </div>
             </div>
-            <div class = "col-1 "></div>
           </div>';
   }
 }
