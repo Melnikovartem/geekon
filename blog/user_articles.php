@@ -86,8 +86,16 @@ mysqli_set_charset($connection, 'utf8');
   <!-- same heading ends -->
 
 <?php
-if(isset($_SESSION[$_COOKIE["blog"] . "id"])){
-  $query_result = mysqli_query($connection, 'SELECT header, id, user_id, time, text FROM articles WHERE user_id = ' . $_SESSION[$_COOKIE["blog"] . "id"] . ' ORDER BY time DESC ');
+if(isset($_GET["id"])){
+  $id = [intval($_GET["id"]), 0]; //just another user
+  if($user_status > 1)// admin
+    $id = [intval($_GET["id"]), 1];
+}
+else if(isset($_SESSION[$_COOKIE["blog"] . "id"]))
+  $id = [$_SESSION[$_COOKIE["blog"] . "id"], 1]; //owner of artcles
+
+if(isset($id)){
+  $query_result = mysqli_query($connection, 'SELECT header, id, user_id, time, text FROM articles WHERE user_id = ' . $id[0] . ' ORDER BY time DESC ');
   $article = mysqli_fetch_all($query_result);
   foreach ($article as $article) {
     $username = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = ' . $article[2]))[0];
