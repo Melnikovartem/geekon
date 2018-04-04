@@ -15,7 +15,7 @@ if(isset($_SESSION[$_COOKIE["blog"]]))
 //code ends
 
 //choose header
-$header = ['<a class="p-2" href="index.php"><strong>Best blog you have ever met!</strong></a>', 'Sign out</button>'];
+$header = ['<a class="p-2" href="index.php"><strong>Best blog you have ever met!</strong></a>', 'Sign out'];
 //new user
 if($user_status == 0){
   $header[1] = 'Sign in';
@@ -23,14 +23,14 @@ if($user_status == 0){
 //loged in user
 else if($user_status == 1){
   $header[0] = '
-  <a class="p-2" href="user_articles"><strong>My artciles</strong></a>
+  <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
   <a class="p-2" href="new_article.php"><strong>New article</strong></a>
   <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //admin
 else if($user_status == 2){
   $header[0] = '
-  <a class="p-2" href="user_articles"><strong>My artciles</strong></a>
+  <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
   <a class="p-2" href="new_article.php"><strong>New article</strong></a>
   <a class="p-2" href="edit_users.php"><strong>Edit users</strong></a>
   <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
@@ -38,7 +38,7 @@ else if($user_status == 2){
 //god admin
   else if($user_status == 3){
     $header[0] = '
-    <a class="p-2" href="user_articles"><strong>My artciles</strong></a>
+    <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
     <a class="p-2" href="new_article.php"><strong>New article</strong></a>
     <a class="p-2" href="edit_users.php"><strong>Edit users</strong></a>
     <a class="p-2" href="edit_admin.php"><strong>Edit admins</strong></a>
@@ -69,8 +69,11 @@ else if($user_status == 2){
         </nav>
       </div>
     </div>
-      <div class = "col-2 sign_out"><form action = "<?php if($user_status == 0) echo "sign_in"; else echo "ans"?>.php">
-        <button class="btn btn-outline-dark"><?php echo $header[1]; ?></button></form></div>
+    <div class = "col-2 sign_out">
+      <form action = "<?php if($user_status == 0) echo "sign_in"; else echo "ans"?>.php">
+        <button class="btn btn-outline-dark"><?php echo $header[1]; ?></button>
+      </form>
+    </div>
   </div>
 </div>
   <!-- same heading ends -->

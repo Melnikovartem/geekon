@@ -30,27 +30,31 @@ $connection = mysqli_connect($data[0], $data[1], $data[2]);
 mysqli_select_db($connection, 'blog');
 mysqli_set_charset($connection, 'utf8');
 
+$body = "<div class='alert alert-danger' role='alert'>Error: No such user!</div>";
+
 //user wants to login/change and all post data is ok
 if(isset($_POST["username"]) and isset($_POST["password"])){
 //check the status of user
-    $query_result = mysqli_query($connection, 'SELECT status FROM users WHERE username = "' . $_POST["username"] . '" AND password = "' . $_POST["password"] . '"');
+    $query_result = mysqli_query($connection, 'SELECT status, id FROM users WHERE username = "' . $_POST["username"] . '" AND password = "' . $_POST["password"] . '"');
     $valid_users = mysqli_fetch_all($query_result);
     if($valid_users){
       $session = generateRandomString();
       $_SESSION[$session] = $valid_users[0][0];
+      $_SESSION[$session . "id"] = $valid_users[0][1];
       $user_status = $valid_users[0][0];
       setcookie("blog", $session , time()+3600);
+      $body = "<div class='alert alert-success' role='alert'>You are in as " . $_POST["username"] . "!</div>";
     }
   }
 else{
+  $body = "<div class='alert alert-success' role='alert'>You signed out!</div>";
   $_SESSION[$_COOKIE["blog"]] = 0; //wanted to log out or just refreshed the page(his mistake) )
-  $body = "";
   $user_status = 0;
 }
 //code ends
 
 //choose header
-$header = ['<a class="p-2" href="index.php"><strong>Best blog you have ever met!</strong></a>', 'Sign out</button>'];
+$header = ['<a class="p-2" href="index.php"><strong>Best blog you have ever met!</strong></a>', 'Sign out'];
 //new user
 if($user_status == 0){
   $header[1] = 'Sign in';
@@ -58,14 +62,14 @@ if($user_status == 0){
 //loged in user
 else if($user_status == 1){
   $header[0] = '
-  <a class="p-2" href="user_articles"><strong>My artciles</strong></a>
+  <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
   <a class="p-2" href="new_article.php"><strong>New article</strong></a>
   <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
 }
 //admin
 else if($user_status == 2){
   $header[0] = '
-  <a class="p-2" href="user_articles"><strong>My artciles</strong></a>
+  <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
   <a class="p-2" href="new_article.php"><strong>New article</strong></a>
   <a class="p-2" href="edit_users.php"><strong>Edit users</strong></a>
   <a class="p-2" href="user_profile.php"><strong>My profile</strong></a>';
@@ -73,7 +77,7 @@ else if($user_status == 2){
 //god admin
   else if($user_status == 3){
     $header[0] = '
-    <a class="p-2" href="user_articles"><strong>My artciles</strong></a>
+    <a class="p-2" href="user_articles.php"><strong>My artciles</strong></a>
     <a class="p-2" href="new_article.php"><strong>New article</strong></a>
     <a class="p-2" href="edit_users.php"><strong>Edit users</strong></a>
     <a class="p-2" href="edit_admin.php"><strong>Edit admins</strong></a>
@@ -104,10 +108,13 @@ else if($user_status == 2){
         </nav>
       </div>
     </div>
-      <div class = "col-2 sign_out"><form action = "<?php if($user_status == 0) echo "sign_in"; else echo "ans"?>.php">
-        <button class="btn btn-outline-dark"><?php echo $header[1]; ?></button></form></div>
+    <div class = "col-2 sign_out">
+      <form action = "<?php if($user_status == 0) echo "sign_in"; else echo "ans"?>.php">
+        <button class="btn btn-outline-dark"><?php echo $header[1]; ?></button>
+      </form>
+    </div>
   </div>
 </div>
   <!-- same heading ends -->
 
-  <?php echo $user_status;?>
+  <?php echo $body;?>

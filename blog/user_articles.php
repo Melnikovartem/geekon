@@ -1,5 +1,5 @@
 <?php
-//main page where user can see all articles
+//main page where user can see all his articles and edit them
 
 //this part is same for all pages
 //I will rewrite evrything
@@ -86,26 +86,31 @@ mysqli_set_charset($connection, 'utf8');
   <!-- same heading ends -->
 
 <?php
-$query_result = mysqli_query($connection, 'SELECT header, id, user_id, time, text FROM articles ORDER BY time DESC');
-$article = mysqli_fetch_all($query_result);
-foreach ($article as $article) {
-  $username = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = ' . $article[2]))[0];
-  if(!$username)
-    $username = ["Deleted User"];
-  echo '<div class = "row article">
-          <div class = "col-1"></div>
-          <div class="card col">
-            <div class="card-body d-flex flex-column align-items-start">
-              <h3 class="mb-0">
-                <a class="text-dark" href="article.php?id=' . $article[1] . '">' . $article[0] . '</a>
-              </h3>
-              <a href="user.php?id=' . $article[2] . '">by '. $username[0] . '</a>
-              <div class="mb-1 text-muted"> ' . $article[3] . '</div>
-              <p class="card-text mb-auto">' . substr($article[4], 0, 80) . '</p>
-              <a href="article.php?id=' . $article[1] . '">Continue reading</a>
+if(isset($_SESSION[$_COOKIE["blog"] . "id"])){
+  $query_result = mysqli_query($connection, 'SELECT header, id, user_id, time, text FROM articles WHERE user_id = ' . $_SESSION[$_COOKIE["blog"] . "id"] . ' ORDER BY time DESC ');
+  $article = mysqli_fetch_all($query_result);
+  foreach ($article as $article) {
+    $username = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = ' . $article[2]))[0];
+    if(!$username)
+      $username = ["Deleted User"];
+    echo '<div class = "row article">
+            <div class = "col-1"></div>
+            <div class="card col">
+              <div class="card-body d-flex flex-column align-items-start">
+                <h3 class="mb-0">
+                  <a class="text-dark" href="article.php?id=' . $article[1] . '">' . $article[0] . '</a>
+                </h3>
+                <a href="user.php?id=' . $article[2] . '">by '. $username[0] . '</a>
+                <div class="mb-1 text-muted"> ' . $article[3] . '</div>
+                <p class="card-text mb-auto">' . substr($article[4], 0, 80) . '</p>
+                <a href="article.php?id=' . $article[1] . '">Continue reading</a>
+              </div>
             </div>
-          </div>
-          <div class = "col-1 "></div>
-        </div>';
+            <div class = "col-1 "></div>
+          </div>';
+  }
+}
+else{
+  echo "";
 }
 ?>
