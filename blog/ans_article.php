@@ -28,11 +28,11 @@ if(isset($_POST["header"]) and isset($_POST["text"])){
       echo "<div class='alert alert-danger' role='alert'>Error: Empty field!</div>";
     else{
       if(!isset($_POST["id"])){//want to post
-        mysqli_query($connection, 'INSERT INTO articles (user_id, header, text) VALUES (' . $_SESSION[$_COOKIE["blog"] . "id"] . ',"' . $_POST["header"] . '","' . $_POST["text"] . '") ');
+        mysqli_query($connection, 'INSERT INTO articles (user_id, header, text) VALUES (' . $_SESSION[$_COOKIE["blog"] . "id"] . ',"' . strip_tags($_POST["header"]) . '","' . strip_tags($_POST["text"]) . '") ');
         $body = "<div class='alert alert-success' role='alert'>Your article was posted!</div>";
       }
       elseif($user_status > 1 or $_POST['id'] == $_SESSION[$_COOKIE["blog"] . "id"]){//allowed to change
-        mysqli_query($connection, 'UPDATE articles SET header = "' . $_POST["header"] . '", text = "' . $_POST["text"] . '" WHERE id = ' . intval($_POST["id"])  );
+        mysqli_query($connection, 'UPDATE articles SET header = "' . strip_tags($_POST["header"]) . '", text = "' . strip_tags($_POST["text"]) . '" WHERE id = ' . intval($_POST["id"])  );
         $body = "<div class='alert alert-success' role='alert'>Your article was changed!</div>";
       }
     }

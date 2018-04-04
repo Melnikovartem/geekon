@@ -116,7 +116,7 @@ if(isset($_GET["id"]) ){
         </div>";
         if(isset($_POST["text"]))
           if($_POST["text"] != ""){
-            mysqli_query($connection, 'INSERT INTO comments (article_id, user_id, text) VALUES ('. $_GET["id"] . ', ' . $_SESSION[$_COOKIE["blog"] . "id"] . ', "' . $_POST["text"] . '") ');
+            mysqli_query($connection, 'INSERT INTO comments (article_id, user_id, text) VALUES ('. intval($_GET["id"]) . ', ' . $_SESSION[$_COOKIE["blog"] . "id"] . ', "' . strip_tags($_POST["text"]) . '") ');
             echo "<div class='alert alert-success' role='alert'>Your comment was published!</div>";
         }
     }
