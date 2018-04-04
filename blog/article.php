@@ -88,7 +88,7 @@ mysqli_set_charset($connection, 'utf8');
 <?php
 if(isset($_GET["id"]) ){
 
-  $query_result = mysqli_query($connection, 'SELECT header, text, time, user_id FROM articles WHERE id = ' . $_GET["id"] );
+  $query_result = mysqli_query($connection, 'SELECT header, text, time, user_id FROM articles WHERE id = ' . intval($_GET["id"]) );
   $article = mysqli_fetch_all($query_result)[0];
   if(isset($article)){
     $username = mysqli_fetch_all(mysqli_query($connection, 'SELECT username FROM users WHERE id = ' . $article[3]))[0];

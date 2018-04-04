@@ -1,5 +1,5 @@
 <?php
-//page to edit article(author or admin)
+//page where i edit/post articles
 
 //this part is same for all pages
 //I will rewrite evrything
@@ -10,8 +10,35 @@ $user_status = 0; //new user
 if(isset($_SESSION[$_COOKIE["blog"]]))
   if($_SESSION[$_COOKIE["blog"]] != "")
     $user_status = $_SESSION[$_COOKIE["blog"]]; //real status
+
 //---here can be some code
 
+//connect to db
+$data= json_decode(file_get_contents('server'), true);
+$connection = mysqli_connect($data[0], $data[1], $data[2]);
+mysqli_select_db($connection, 'blog');
+mysqli_set_charset($connection, 'utf8');
+
+$body = "<div class='alert alert-danger' role='alert'>Error: Missing data!</div>";
+
+//user wants to post/change article and all post data is ok
+if(isset($_POST["header"]) and isset($_POST["text"])){
+  if(isset($_SESSION[$_COOKIE["blog"] . "id"]))
+    if($_POST["header"] == "" or $_POST["header"] == "")
+      echo "<div class='alert alert-danger' role='alert'>Error: Empty field!</div>";
+    else{
+      if(!isset($_POST["id"])){//want to post
+        mysqli_query($connection, 'INSERT INTO articles (user_id, header, text) VALUES (' . $_SESSION[$_COOKIE["blog"] . "id"] . ',"' . $_POST["header"] . '","' . $_POST["text"] . '") ');
+        $body = "<div class='alert alert-success' role='alert'>Your article was posted!</div>";
+      }
+      elseif($user_status > 1 or $_POST['id'] == $_SESSION[$_COOKIE["blog"] . "id"]){//allowed to change
+        mysqli_query($connection, 'UPDATE articles SET header = "' . $_POST["header"] . '", text = "' . $_POST["text"] . '" WHERE id = ' . intval($_POST["id"])  );
+        $body = "<div class='alert alert-success' role='alert'>Your article was changed!</div>";
+      }
+    }
+    else
+      $body = "<div class='alert alert-danger' role='alert'>Error: Sign in first!</div>";
+}
 //code ends
 
 //choose header
@@ -48,12 +75,6 @@ else if($user_status == 2){
 //same part ends
 
 //have to generate body
-
-//connect to db
-$data= json_decode(file_get_contents('server'), true);
-$connection = mysqli_connect($data[0], $data[1], $data[2]);
-mysqli_select_db($connection, 'blog');
-mysqli_set_charset($connection, 'utf8');
 ?>
 
 <meta charset="utf-8">
@@ -84,36 +105,4 @@ mysqli_set_charset($connection, 'utf8');
 </div>
   <!-- same heading ends -->
 
-<div class="col" >
-  <form method = "POST" action = "ans_article.php">
-
-<?php
-if(isset($_GET["id"]) ){
-  $query_result = mysqli_query($connection, 'SELECT header, text FROM articles WHERE id = ' . intval($_GET["id"]) );
-  $article = mysqli_fetch_all($query_result)[0];
-  if(isset($article)){
-    echo '
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Header</span>
-          </div>
-          <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name = "header" value="' . $article[0] . '">
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">Your text</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "text">' . $article[1]. '</textarea>
-        </div>';
-  }
-  else
-    echo "<div class='alert alert-danger' role='alert'>Error: not valid article id!</div>";
-}
-else
-  echo "<div class='alert alert-danger' role='alert'>Error: empty article id!</div>";
-
-if($user_status > 1 or $_POST['id'] == $_SESSION[$_COOKIE["blog"] . "id"]){
-    echo '<input type = "hidden" name = "id" value = ' . $_GET["id"] . '>
-    <button type="submit" class="btn btn-outline-success">Edit</button>';
-}
-?>
-
-</div>
+  <?php echo $body;?>
