@@ -37,10 +37,12 @@ if(isset($_POST["username"]) and isset($_POST["password"])){
 //check the status of user
     if(isset($_POST["email"]) and isset($_POST["text"])){//new user
       if(isset($_POST["id"])){//want to change
-        if($user_status > 2 or $_SESSION[$_COOKIE["blog"] . "id"] == $_POST["id"])
-// to do
+        if($user_status > 2 or $_SESSION[$_COOKIE["blog"] . "id"] == $_POST["id"]){// to do
+
+          }
+        }
       }
-      else{
+    else{
         $query_result = mysqli_query($connection, 'SELECT id FROM users WHERE username = "' . $_POST["username"] . '"');
         if(!isset(mysqli_fetch_all($query_result)[0]))
           mysqli_query($connection, 'INSERT INTO users (username, password, email, about) VALUES ("' . strip_tags($_POST["username"])  . '", "' . $_POST["password"] . '", "' . $_POST["email"] . '", "' . $_POST["text"] . '")');
