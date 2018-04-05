@@ -122,7 +122,7 @@ else if($user_status == 2){
       </div>
     </div>
     <div class = "col-2 sign_out">
-      <form action = "<?php if($user_status == 0) echo "sign_in"; else echo "ans"?>.php">
+      <form action = "<?php if($user_status == 0) echo "sign_in"; else echo "ans_user"?>.php">
         <button class="btn btn-outline-dark"><?php echo $header[1]; ?></button>
       </form>
     </div>
