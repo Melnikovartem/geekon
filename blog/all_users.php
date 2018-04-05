@@ -98,7 +98,7 @@ mysqli_set_charset($connection, 'utf8');
     if($user_status > 2 or $_SESSION[$_COOKIE["blog"] . "id"] == $user[0]){
         echo'<h4>' . $user[2] . '</h4>';
     }
-    echo       '<p> <big>About:</big> '. ($user[3]=='' ? "None!!!" :$user[3]) . '</p><h4>';
+    echo       '<p style = "margin-bottom: .5rem"> <big>About:</big> '. ($user[3]=='' ? "None!!!" :$user[3]) . '</p><h4>';
     if($user[4] == 1)
       echo 'basic user';
     else if($user[3] == 2)
