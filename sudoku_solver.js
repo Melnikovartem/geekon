@@ -11,10 +11,15 @@ var map = [
     ['', '5', '', '', '3', '', '', '', '1']
 ];
 
-function sudoku_solver(map){
+function sudoku_solver(map, iter){
 
-   for(var i =0; i<9; i++){
-     for(var j =0; j<9; j++)
+   if(iter > 100)
+     return 0
+
+   var i,j,k;
+
+   for(i =0; i<9; i++){
+     for(j =0; j<9; j++)
        if(map[i][j] === '')
          map[i][j] = [1,2,3,4,5,6,7,8,9]
        else
@@ -103,12 +108,34 @@ function sudoku_solver(map){
        }
   }
 
-  console.log("start")
-  for(i = 0; i< 100; i++)
+  for(i = 0; i< 20; i++)
     check_all();
-  prints();
 
-  return map;
+
+
+  for(i = 0; i< 9; i++)
+    for(j = 0; j< 9; j++)
+      if(map[i][j].length != 1)
+        for(k = 0; k < map[i][j].length; k++){
+          consloe.log("----fake_map")
+          var fake_map = map;
+          fake_map[i][j] = [fake_map[i][j][k]]
+          fake_map = sudoku_solver(fake_map, iter+1);
+          if(fake_map)
+            return fake_map
+          }
+
+  var y = true
+  for(i =0; i<9; i++)
+     for(j =0; j<9; j++)
+       if(map[i][j].length != 1)
+         y = false;
+  if(y)
+    return map;
+  return 0;
 }
 
-console.log(sudoku_solver(map));
+console.log(sudoku_solver(map, 0))
+
+
+http://jsbin.com/coniwewixe/edit?js,console
