@@ -1,3 +1,7 @@
+@extends('layouts.main')
+
+@section('content')
+
 <form method="POST">
         @csrf
         <label>Имя</label>
@@ -12,3 +16,5 @@
 </form>
 
 <a href="{{url('/')}}">Назад</a>
+
+@endsection
