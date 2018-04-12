@@ -5,7 +5,7 @@
 <script type="text/javascript">
 var ctx = null, game = null;
 var mazeMap = null;
-var w = 5, h = 5;
+var w = 5, h = 5, s = 40; // w - width, h- height, s - scale
 
 window.onload = function() {
 	game = document.getElementById('game');
@@ -35,14 +35,14 @@ function drawGame()
 	{
 		for(var x = 0; x < mazeMap.gridW; ++x)
 		{
-			if(mazeMap.gridMap[y][x]==0) { ctx.fillRect(10 * x, 10 * y, 10, 10); }
+			if(mazeMap.gridMap[y][x]==0) { ctx.fillRect(s * x, s * y, s, s); }
 		}
 	}
 
 	ctx.fillStyle = "#FF0000";
-	ctx.fillRect(10 * mazeMap.UserX, 10 * mazeMap.UserY, 10, 10);
+	ctx.fillRect(s * mazeMap.UserX, s * mazeMap.UserY, s, s);
 	ctx.fillStyle = "#00FF00";
-	ctx.fillRect(10 * mazeMap.TargetX, 10 * mazeMap.TargetY, 10, 10)
+	ctx.fillRect(s * mazeMap.TargetX, s * mazeMap.TargetY, s, s)
 	requestAnimationFrame(drawGame);
 }
 
@@ -86,6 +86,8 @@ function Maze(w, h)
 	this.TargetY = y;
 }
 
+
+//wtf is this???
 Maze.prototype.toGrid = function()
 {
 	var grid = new Array();
@@ -179,12 +181,10 @@ window.onkeyup = function(e){
 	}
 }
 Maze.prototype.move = function(x_n, y_n){
-	console.log(this.gridMap[this.UserX + x_n][this.UserY + y_n])
-	if(this.gridMap[this.UserX + x_n][this.UserY + y_n] == 1){
-		console.log("ok");
+	if(this.gridMap[this.UserY + y_n][this.UserX + x_n] == 1){
 		this.UserX += x_n;
 		this.UserY += y_n;
-		if(this.UserX == this.TargetX && this.UserY ){
+		if(this.UserX == this.TargetX && this.UserY == this.TargetY){
 			document.getElementById("win").style.display = "block";
 		}
 	}
