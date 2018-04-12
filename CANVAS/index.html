@@ -6,7 +6,7 @@
 <script type="text/javascript">
 var ctx = null, game = null;
 var mazeMap = null;
-var w = 10, h = 10, s = 20; // w - width, h- height, s - scale
+var w = 10, h = 10, s = 20, v = 5; // w - width, h- height, s - scale, v - vision
 
 window.onload = function() {
 	game = document.getElementById('game');
@@ -32,9 +32,9 @@ function drawGame()
 
 	ctx.fillStyle = "#000000";
 
-	for(var y = 0; y < mazeMap.gridH; ++y)
+	for(var y = mazeMap.UserY-v > 0 ? mazeMap.UserY-v : 0; y < (mazeMap.UserY+v < mazeMap.gridH ? mazeMap.UserY+v : mazeMap.gridH); ++y)
 	{
-		for(var x = 0; x < mazeMap.gridW; ++x)
+		for(var x = mazeMap.UserX-v > 0 ? mazeMap.UserX-v : 0; x < (mazeMap.UserX+v < mazeMap.gridW ? mazeMap.UserX+v : mazeMap.gridW); ++x)
 		{
 			if(mazeMap.gridMap[y][x]==0) { ctx.fillRect(s * x, s * y, s, s); }
 		}
