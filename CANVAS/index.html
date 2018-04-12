@@ -4,19 +4,21 @@
 
 <script type="text/javascript">
 var ctx = null, game = null;
-var mazeMap = null, mazeW = 30, mazeH = 30;
+var mazeMap = null;
+var w = 5, h = 5;
 
 window.onload = function() {
 	game = document.getElementById('game');
 	ctx = game.getContext('2d');
 	ctx.font = "bold 10pt sans-serif";
 
-	mazeMap = new Maze(15,15);
+	mazeMap = new Maze(w,h);
 
 	requestAnimationFrame(drawGame);
 
 	document.getElementById('reset').addEventListener('click', function() {
-		mazeMap = new Maze(10,10);
+		document.getElementById("win").style.display = "none";
+		mazeMap = new Maze(w,h);
 	});
 };
 
@@ -25,7 +27,7 @@ function drawGame()
 	if(ctx==null) { return; }
 
 	ctx.fillStyle = "#ffffff";
-	ctx.fillRect(0, 0, 800, 400);
+	ctx.fillRect(0, 0, 1000, 1000);
 
 	ctx.fillStyle = "#000000";
 
@@ -37,13 +39,15 @@ function drawGame()
 		}
 	}
 
+	ctx.fillStyle = "#FF0000";
+	ctx.fillRect(10 * mazeMap.UserX, 10 * mazeMap.UserY, 10, 10);
+	ctx.fillStyle = "#00FF00";
+	ctx.fillRect(10 * mazeMap.TargetX, 10 * mazeMap.TargetY, 10, 10)
 	requestAnimationFrame(drawGame);
 }
 
 
-
-// конструктор лабиринта * из интернета
-
+// конструктор лабиринта *из интернета
 function Maze(w, h)
 {
 	this.w = (isNaN(w) || w < 5 || w > 999 ? 20 : w);
@@ -59,6 +63,27 @@ function Maze(w, h)
 	};
 
 	this.build(0, 0);
+	// my part
+	var x, y;
+	//генерируем точку игрока
+	x = Math.floor(Math.random()*this.w/2);
+	y = Math.floor(Math.random()*this.h/2);
+	while(this.gridMap[x][y] != 1){
+		x = Math.floor(Math.random()*this.w/2);
+		y = Math.floor(Math.random()*this.h/2);
+	}
+	this.UserX = x;
+	this.UserY = y;
+
+	x = this.w + Math.floor(Math.random()*this.w);
+	y = this.h + Math.floor(Math.random()*this.h);
+	//генерируем точку цели
+	while(this.gridMap[x][y] != 1){
+		x = this.w + Math.floor(Math.random()*this.w);
+		y = this.h + Math.floor(Math.random()*this.h);
+	}
+	this.TargetX = x;
+	this.TargetY = y;
 }
 
 Maze.prototype.toGrid = function()
@@ -75,7 +100,6 @@ Maze.prototype.toGrid = function()
 			var px = (x * 2) + 1;
 
 			if(this.map[y][x].v==1) { grid[py][px] = 1; }
-			else if(this.map[y][x].v==2) { grid[py][px] = 2; }
 
 			for(d in this.dirs)
 			{
@@ -133,13 +157,46 @@ function sortRand(a)
 	return out;
 }
 
+
+//movement
+
+
+window.onkeyup = function(e){
+	var key = event.which || event.keyCode;
+	switch(key){
+		case 87:
+			mazeMap.move(0, -1);
+			break;
+		case 83:
+			mazeMap.move(0, 1);
+			break;
+		case 65:
+			mazeMap.move(-1, 0);
+			break;
+		case 68:
+			mazeMap.move(1, 0);
+			break;
+	}
+}
+Maze.prototype.move = function(x_n, y_n){
+	console.log(this.gridMap[this.UserX + x_n][this.UserY + y_n])
+	if(this.gridMap[this.UserX + x_n][this.UserY + y_n] == 1){
+		console.log("ok");
+		this.UserX += x_n;
+		this.UserY += y_n;
+		if(this.UserX == this.TargetX && this.UserY ){
+			document.getElementById("win").style.display = "block";
+		}
+	}
+}
 </script>
 </head>
 <body>
 
-<p>Recursive Backtracking maze.</p>
+<h1>Try this Maze!</h1>
 <input id="reset" type="button" value="Reset maze"><br>
-<canvas id="game" width="500" height="500"></canvas>
+<h3 id = "win" style = "display:none">You WON!</h3>
+<canvas id="game" width="1000" height="1000"></canvas>
 
 </body>
 </html>
