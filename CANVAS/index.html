@@ -2,11 +2,12 @@
 <html>
 <head>
 <title>Maze!</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel = "stylesheet" href = "main.css">
 <script type="text/javascript">
 var ctx = null, game = null;
 var mazeMap = null;
-var w = 30, h = 30, s = 20, v = 5; // w - width, h- height, s - scale, v - vision
+var w = 30, h = 30, s = 10, v = 5; // w - width, h- height, s - scale, v - vision
 
 window.onload = function() {
 	game = document.getElementById('game');
@@ -85,6 +86,8 @@ function Maze(w, h)
 	}
 	this.TargetX = x;
 	this.TargetY = y;
+
+	console.log(this.TargetX, this.TargetY, this.UserX, this.UserY)
 }
 
 
@@ -195,6 +198,15 @@ Maze.prototype.move = function(x_n, y_n){
 <body>
 
 <h1>Try this Maze!</h1>
+
+<p>Tips:</p>
+<ul>
+	<li>W,S,A,D to control red dot</li>
+	<li>You have to get to green dot.</li>
+	<li>You can see some space around you and the geen dot</li>
+	<li>After solving this maze you can get another one by "reset maze"</li>
+
+</ul>
 <input id="reset" type="button" value="Reset maze"><br>
 <h3 id = "win" style = "display:none">You WON!</h3>
 <canvas id="game" width="1000" height="1000"></canvas>
