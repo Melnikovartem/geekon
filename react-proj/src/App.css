@@ -26,3 +26,46 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.elephant{
+  position: relative;
+}
+
+.leg{
+  position: absolute;
+  top: 316px;
+  left: 2px;
+}
+
+.hand{
+  position: absolute;
+  top: 316px;
+  left: 250px;
+}
+
+.body{
+  position: absolute;
+    left: 45px;
+}
+
+.head{
+  position: absolute;
+    left: 430px;
+}
+
+.tail{
+  position: absolute;
+}
+
+.choosing{
+  width : calc(100% - 40px);
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  top: 450px;
+  margin: 20px;
+}
+
+.list{
+  position: relative;
+}
