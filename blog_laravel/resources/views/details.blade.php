@@ -12,7 +12,15 @@
     @foreach($contact->phones as $phone)
         <li>{{ $phone->phone }} <a href="{{url('/phone/'.$phone->id.'/delete')}}">удалить</a></li>
     @endforeach
-    <a href="{{url('/contact/'.$contact->id.'/add_phone')}}">добавить</a>
+    <a href="{{url('/phone/'.$contact->id.'/add')}}">добавить</a>
+</ul>
+
+<h3>Websites:</h3>
+<ul>
+    @foreach($contact->websites as $website)
+        <li>{{ $website->website }} <a href="{{url('/website/'.$website->id.'/delete')}}">удалить</a></li>
+    @endforeach
+    <a href="{{url('/website/'.$contact->id.'/add')}}">добавить</a>
 </ul>
 
 <a href="{{url('/contact/'.$contact->id.'/edit')}}">Изменить</a><br>

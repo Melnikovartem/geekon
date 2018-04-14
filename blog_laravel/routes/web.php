@@ -20,6 +20,10 @@ Route::post('/add', 'ContactsController@add');
 Route::post('/contact/{id}/edit', 'ContactsController@edit');
 Route::get('/contact/{id}/delete', 'ContactsController@delete');
 
-Route::get('/contact/{contact_id}/add_phone', 'PhonesController@addForm');
-Route::post('/contact/{contact_id}/add_phone', 'PhonesController@add');
+Route::get('/phone/{contact_id}/add', 'PhonesController@addForm');
+Route::post('/phone/{contact_id}/add', 'PhonesController@add');
 Route::get('/phone/{id}/delete', 'PhonesController@delete');
+
+Route::get('/website/{contact_id}/add', 'WebsitesController@addForm');
+Route::post('/website/{contact_id}/add', 'WebsitesController@add');
+Route::get('/website/{id}/delete', 'WebsitesController@delete');

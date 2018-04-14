@@ -14,4 +14,10 @@ class Contact extends Model
         return $this->hasMany('App\Phone', 'contact_id', 'id');
     }
 
+    public function websites()
+    {
+        return $this->hasMany('App\Website', 'contact_id', 'id');
+    }
+
+
 }
