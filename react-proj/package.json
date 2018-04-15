@@ -1,6 +1,7 @@
 {
   "name": "react-proj",
   "version": "0.1.0",
+  "homepage": "/elephant",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.0",
