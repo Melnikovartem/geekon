@@ -6,11 +6,13 @@
 <link rel = "stylesheet" href = "main.css">
 <script type="text/javascript">
 var ctx = null, game = null;
-var mazeMap = null;
-var w = 30, h = 30, s = 10, v = 5; // w - width, h- height, s - scale, v - vision
+var mazeMap = null, noWin = true;
+var w = 20, h = 20, s = 10, v = 5; // w - width, h- height, s - scale, v - vision
 
 window.onload = function() {
 	game = document.getElementById('game');
+	game.height = s*h*2+s;
+	game.width =  s*w*2+s;
 	ctx = game.getContext('2d');
 	ctx.font = "bold 10pt sans-serif";
 
@@ -19,11 +21,15 @@ window.onload = function() {
 	requestAnimationFrame(drawGame);
 
 	document.getElementById('reset').addEventListener('click', function() {
-		document.getElementById("win").style.display = "none";
-		mazeMap = new Maze(w,h);
+		reset()
 	});
 };
 
+function reset(){
+	document.getElementById("win").style.display = "none";
+	mazeMap = new Maze(w,h);
+	noWin = true;
+}
 function drawGame()
 {
 	if(ctx==null) { return; }
@@ -33,9 +39,9 @@ function drawGame()
 
 	ctx.fillStyle = "#000000";
 
-	for(var y = mazeMap.UserY-v > 0 ? mazeMap.UserY-v : 0; y < (mazeMap.UserY+v < mazeMap.gridH ? mazeMap.UserY+v : mazeMap.gridH); ++y)
+	for(var y = mazeMap.UserY-v > 0 && noWin ? mazeMap.UserY-v : 0; y < (mazeMap.UserY+v < mazeMap.gridH && noWin ? mazeMap.UserY+v : mazeMap.gridH); ++y)
 	{
-		for(var x = mazeMap.UserX-v > 0 ? mazeMap.UserX-v : 0; x < (mazeMap.UserX+v < mazeMap.gridW ? mazeMap.UserX+v : mazeMap.gridW); ++x)
+		for(var x = mazeMap.UserX-v > 0 && noWin ? mazeMap.UserX-v : 0; x < (mazeMap.UserX+v < mazeMap.gridW && noWin ? mazeMap.UserX+v : mazeMap.gridW); ++x)
 		{
 			if(mazeMap.gridMap[y][x]==0) { ctx.fillRect(s * x, s * y, s, s); }
 		}
@@ -182,6 +188,9 @@ window.onkeyup = function(e){
 		case 68:
 			mazeMap.move(1, 0);
 			break;
+		case 69:
+			reset()
+			break;
 	}
 }
 Maze.prototype.move = function(x_n, y_n){
@@ -190,6 +199,7 @@ Maze.prototype.move = function(x_n, y_n){
 		this.UserY += y_n;
 		if(this.UserX == this.TargetX && this.UserY == this.TargetY){
 			document.getElementById("win").style.display = "block";
+			noWin = false;
 		}
 	}
 }
@@ -202,14 +212,15 @@ Maze.prototype.move = function(x_n, y_n){
 <p>Tips:</p>
 <ul>
 	<li>W,S,A,D to control red dot</li>
+	<li>E or button to reset maze</li>
 	<li>You have to get to green dot.</li>
 	<li>You can see some space around you and the geen dot</li>
 	<li>After solving this maze you can get another one by "reset maze"</li>
 
 </ul>
 <input id="reset" type="button" value="Reset maze"><br>
+<canvas id="game" width="1000"></canvas>
 <h3 id = "win" style = "display:none">You WON!</h3>
-<canvas id="game" width="1000" height="1000"></canvas>
 
 </body>
 </html>
